@@ -1,0 +1,97 @@
+<div class="row cus-border">
+    <div class="col-md-12 cus-txt">
+        <h4>联系人</h4>
+    </div>
+    <div class="col-md-12 "  ng-repeat="people in customer.peoples">
+        <div class="cus-people">
+            <div class="cus-btn">
+                <span  ng-class="{true: 'fa-star', false: 'fa-star-o'}[people.isImportant]" class="fa col" ng-click="people.isImportant = !people.isImportant" ng-model="people.isImportant"></span>
+
+                <span ng-class="{true: 'fa-edit', false: 'fa-check'}[people.isEdit]" class="fa dis" ng-click="people.isEdit=!people.isEdit" ng-model="people.isEdit"></span>
+
+                <span class="fa fa-minus del" ng-click="cusdel($index)"></span>
+                <span class="fa fa-plus add" ng-click="cusadd()"></span>
+            </div>
+            <div class="row">
+                <div class="col-sm-5">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">姓名</label>
+                        <div class="col-sm-9" ng-class="{'has-danger': customerForm.personName{{$index}}.$invalid}">
+                            <input type="text" name="personName{{$index}}" class="form-control" placeholder="姓名" ng-model="people.name" ng-disabled="people.isEdit" required ng-maxlength="50"></div>
+                    </div>
+                </div>
+                <!-- /.col-sm-5 -->
+                <div class="col-sm-5 col-sm-offset-1">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">邮箱</label>
+                        <div class="col-sm-9" ng-class="{'has-danger': customerForm.personMail{{$index}}.$invalid}">
+                            <input type="email" name="personMail{{$index}}" class="form-control" placeholder="邮箱" ng-model="people.email" ng-disabled="people.isEdit" required ng-maxlength="50"></div>
+                    </div>
+                </div>
+                <!-- /.col-sm-5 -->
+                <div class="col-sm-5">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">性别</label>
+                        <div class="col-sm-9">
+                            <button type="button" class="form-control form-select" ng-model="people.sex" data-html="1" data-toggle="true" bs-options="sex.value as sex.label for sex in sexs" ng-disabled="people.isEdit" placeholder="请选择性别" data-animation="am-flip-x" bs-select>
+                                <span class="caret"></span> <!-- <i class="fa fa-sort-down fa-lg"></i> -->
+                            </button>
+<!--                             <div class="radio">
+                                <label>
+                                    <input type="radio" class="" name="sex{{$index}}" checked="{{people.sex}}" ng-disabled="people.isEdit">
+                                    男
+                                    <span></span>
+                                </label>
+                            </div> -->
+                        </div>
+<!--                         <div class="col-xs-2">
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" class="" name="sex{{$index}}" checked="{{!people.sex}}" ng-disabled="people.isEdit">
+                                    女
+                                    <span></span>
+                                </label>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+                <!-- /.col-sm-5 -->
+                <div class="col-sm-5 col-sm-offset-1">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">生日</label>
+                        <div class="col-sm-9" ng-class="{'has-danger': customerForm.personBirthed{{$index}}.$invalid}">
+                             <input type="text" name="personBirthed{{$index}}" class="form-control"  data-date-format="yyyy-MM-dd" data-date-type="number" data-min-date="02/10/86" data-max-date="today" data-autoclose="1"  ng-model="people.birthed" ng-disabled="people.isEdit" placeholder="生日" data-animation="am-flip-x" bs-datepicker>
+                         </div>
+                    </div>
+                </div>
+                <!-- /.col-sm-5 -->
+                <div class="col-sm-5">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">联系方式</label>
+                        <div class="col-sm-9" ng-class="{'has-danger': customerForm.personMobile{{$index}}.$invalid}">
+                            <input type="text" name="personMobile{{$index}}" class="form-control" placeholder="联系方式" ng-model="people.phone" ng-disabled="people.isEdit" ng-maxlength="20"></div>
+                    </div>
+                </div>
+                <!-- /.col-sm-5 -->
+                <div class="col-sm-5 col-sm-offset-1">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">职位</label>
+                        <div class="col-sm-9" ng-class="{'has-danger': customerForm.personPosition{{$index}}.$invalid}">
+                            <input type="text" name="personPosition{{$index}}" class="form-control" placeholder="职位" ng-model="people.position" ng-disabled="people.isEdit" ng-maxlength="50"></div>
+                    </div>
+                </div>
+                <!-- /.col-sm-5 -->
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label">备注</label>
+                        <div class="col-sm-10"  style="padding-left:45px;">
+                            <textarea name="" id="" cols="20" rows="5" class="form-control" ng-disabled="people.isEdit" ng-model="people.remark"></textarea>
+                        </div>
+                    </div>
+                    <!-- /.col-sm-11 --> </div>
+                <!-- /.row --> </div>
+        </div>
+    </div>
+    <!-- /.col-md-12 -->
+</div>
+<!-- /.row -->

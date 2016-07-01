@@ -1,0 +1,228 @@
+<div class="row cus-border">
+    <div class="col-sm-12 cus-txt">
+        <h4>日程</h4>
+    </div>
+    <!--<div class="col-sm-2">
+    <button class="btn btn-success" ng-click="comuadd($index)">添加日程</button>
+</div>
+-->
+<div class="col-md-12">
+    <div class="row cus-sche" ng-click="scheadd()" style="cursor:pointer">
+        <div class="col-sm-12 sche-add"  > <i class="fa fa-plus fa-lg"></i>
+        </div>
+        <!-- /.col-sm-12 --> </div>
+    <!-- /.row cus-sche -->
+    <div class="row cus-sche" ng-repeat="schedule in customer.schedule" >
+        <div class="col-sm-3">
+            <p> <i class="fa fa-calendar" style="width:2em"></i>
+                {{schedule.fromDate | schetime}}
+                <i class="fa fa-arrows-h" style="width:1.5em;margin-left: .5em"></i>
+                <i class="fa fa-calendar" style="width:2em"></i>
+                {{schedule.untilDate | schetime}}
+            </p>
+        </div>
+        <!-- /.col-sm-3 -->
+        <div class="col-sm-7">
+            <p ng-bind="schedule.content"></p>
+        </div>
+        <!-- /.col-sm-6 -->
+        <div class="col-sm-2">
+            <div class="row">
+                <div class="col-sm-4">
+                    <a href="" ng-click="schecomp($index,'schedule')">
+                        <i class="fa fa-check fa-lg"></i>
+                    </a>
+                </div>
+                <!-- /.col-sm-4 -->
+                <div class="col-sm-4">
+                    <a href="" ng-click="openSchedule($index)">
+                        <i class="fa fa-edit fa-lg"></i>
+                    </a>
+
+                </div>
+                <!-- /.col-sm-4 -->
+                <div class="col-sm-4">
+                    <a href="" ng-click="schedel($index,'schedule')">
+                        <i class="fa fa-trash fa-lg"></i>
+                    </a>
+
+                </div>
+                <!-- /.col-sm-4 --> </div>
+            <!-- /.row --> </div>
+        <!-- /.col-sm-3 --> </div>
+    <!-- /.row -->
+    <div class="row" ng-show="!customer.schedule_expired.length==0">
+        <div class="col-sm-12">
+            <h4 class="btn btn-danger">已过期</h4>
+
+        </div>
+    </div>
+    <div class="row cus-sche" ng-repeat="schedule in customer.schedule_expired" >
+        <div class="col-sm-3">
+            <p>
+                <i class="fa fa-calendar" style="width:2em"></i>
+                {{schedule.fromDate | schetime}}
+                <i class="fa fa-arrows-h" style="width:1.5em;margin-left: .5em"></i>
+                <i class="fa fa-calendar" style="width:2em"></i>
+                {{schedule.untilDate | schetime}}
+            </p>
+        </div>
+        <!-- /.col-sm-3 -->
+        <div class="col-sm-7">
+            <p ng-bind="schedule.content"></p>
+        </div>
+        <!-- /.col-sm-6 -->
+        <div class="col-sm-2">
+            <div class="row">
+                <div class="col-sm-4">
+                    <a href="" ng-click="schecomp($index,'schedule_expired')">
+                        <i class="fa fa-check fa-lg"></i>
+                    </a>
+                </div>
+                <!-- /.col-sm-4 -->
+                <div class="col-sm-4">
+                    <a href="" ng-click="openSchedule($index)">
+                        <i class="fa fa-edit fa-lg"></i>
+                    </a>
+
+                </div>
+                <!-- /.col-sm-4 -->
+                <div class="col-sm-4">
+                    <a href="" ng-click="schedel($index,'schedule_expired')">
+                        <i class="fa fa-trash fa-lg"></i>
+                    </a>
+
+                </div>
+                <!-- /.col-sm-4 --> </div>
+            <!-- /.row --> </div>
+        <!-- /.col-sm-3 --> </div>
+    <!-- /.row -->
+    <div class="row" ng-show="!customer.schedule_complete.length==0">
+        <div class="col-sm-12">
+            <h4 class="btn btn-success">已完成</h4>
+        </div>
+    </div>
+    <div class="row cus-sche" ng-repeat="schedule in customer.schedule_complete" >
+        <div class="col-sm-3">
+            <p>
+                <i class="fa fa-calendar" style="width:2em"></i>
+                {{schedule.fromDate | schetime}}
+                <i class="fa fa-arrows-h" style="width:1.5em;margin-left: .5em"></i>
+                <i class="fa fa-calendar" style="width:2em"></i>
+                {{schedule.untilDate | schetime}}
+            </p>
+        </div>
+        <!-- /.col-sm-3 -->
+        <div class="col-sm-5">
+            <p ng-bind="schedule.content"></p>
+        </div>
+        <div class="col-sm-2">
+            <p ng-bind="schedule.nowDate | time"></p>
+        </div>
+        <!-- /.col-sm-2 -->
+        <div class="col-sm-2">
+            <div class="row">
+                <!-- /.col-sm-4 -->
+                <div class="col-sm-4 col-sm-offset-4">
+                    <a href="" ng-click="schereply($index)">
+                        <i class="fa fa-reply fa-lg"></i>
+                    </a>
+                </div>
+                <!-- /.col-sm-4 -->
+                <div class="col-sm-4">
+                    <a href="" ng-click="schedel($index,'schedule_complete')">
+                        <i class="fa fa-trash fa-lg"></i>
+                    </a>
+
+                </div>
+                <!-- /.col-sm-4 --> </div>
+            <!-- /.row --> </div>
+        <!-- /.col-sm-3 --> </div>
+    <!-- /.row -->
+</div>
+<!-- /.col-md-12 -->
+</div>
+<!-- /.row -->
+
+<!-- 日程弹出框 -->
+<script type="text/ng-template" id="schedule.html">
+<form name="scheduleForm">
+    <div class="modal-header">
+        <h4 class="modal-title">推进信息</h4>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-sm-12" style="margin-bottom:20px;line-height: 34px;">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">关联联系人</label>
+                    <div class="col-sm-5">
+                        <button type="button" class="form-control form-select" ng-model="selectPerson" data-html="1" data-toggle="true" bs-options="per.value as per.label for per in person" placeholder="请选择联系人" data-animation="am-flip-x" bs-select >
+                            <span class="caret"></span>
+                        </button>
+                    </div>
+                    <!-- <div class="col-sm-4">
+                        <div class="checkbox" style="margin-top: 6px;line-height: 20px;">
+                            <label>
+                                <input type="checkbox"> 全天日程           
+                                <span></span>
+                            </label>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+
+            <div class="col-sm-12" style="margin-bottom:20px; line-height: 34px;">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">起止日期</label>
+                    <div class="col-sm-4" ng-class="{'has-danger': scheduleForm.fromDate.$invalid}">
+                        <input type="text" name="fromDate" class="form-control" ng-model="schedule.fromDate" data-max-date="{{schedule.untilDate}}" placeholder="开始日期" data-date-format="yyyy-MM-dd" data-date-type="number" data-animation="am-flip-x" required bs-datepicker></div>
+                    <div class="col-sm-1">
+                        <p class="text-center">至</p>
+                    </div>
+                    <div class="col-sm-4" ng-class="{'has-danger': scheduleForm.untilDate.$invalid}">
+                        <input type="text" name="untilDate" class="form-control" ng-model="schedule.untilDate" data-min-date="{{schedule.fromDate}}" placeholder="结束日期" data-date-format="yyyy-MM-dd" data-date-type="number" data-animation="am-flip-x" required bs-datepicker></div>
+                </div>
+            </div>
+            <div class="col-sm-12" style="margin-bottom:20px; line-height: 34px;">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">提醒日期</label>
+
+                    <div class="col-sm-10">
+                        <div class="row" ng-repeat="remind in schedule.remind">
+                            <div class="col-xs-10" style="margin-bottom:15px;" ng-class="{'has-danger': scheduleForm.remindDate{{$index}}.$invalid}">
+                                <input type="text" name="remindDate{{$index}}" class="form-control" ng-model="remind.date" data-min-date="{{schedule.fromDate}}" data-max-date="{{schedule.untilDate}}" placeholder="提醒日期" data-date-format="yyyy-MM-dd" data-date-type="number" data-animation="am-flip-x" required bs-datepicker></div>
+                            <!-- /.col-xs-10 -->
+                            <div class="col-xs-1"><a href="" ng-click="remindadd()"><i class="fa fa-plus fa-lg" style="cursor:pointer"></i></a></div>
+                            <!-- /.col-xs-1 -->
+                            <div class="col-xs-1"><a href="" ng-click="reminddel()"><i class="fa fa-minus fa-lg" style="cursor:pointer"></i></a></div>
+                            <!-- /.col-xs-1 --> </div>
+                        <!-- /.row --> </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">日程内容</label>
+                    <div class="col-sm-10" ng-class="{'has-danger': scheduleForm.scheContent.$invalid}">
+                        <textarea name="scheContent" cols="20" rows="5" class="form-control" placeholder="请输入日程" ng-model="schedule.content" required ng-maxlength="200"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="button" ng-click="scheduleSave()" ng-disabled="scheduleForm.$invalid">保存</button>
+        <button class="btn btn-danger" type="button" ng-click="scheduleCancel()">取消</button>
+    </div>
+</form>
+</script>
+
+<script type="text/ng-template" id="dialogWithNestedConfirmDialogId">
+        
+<!--         <div class="ngdialog-message">
+            <h3>标题党</h3>
+            <input type="text" class="form-control" ng-model="mydata"></div>
+        <div class="ngdialog-buttons">
+            <button type="button" class="ngdialog-button ngdialog-button-secondary" ng-click="closeThisDialog('Cancel')">取消</button>
+            <button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="confirm(mydata)">保存</button>
+        </div> -->
+    </script>
