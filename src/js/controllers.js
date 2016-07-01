@@ -139,82 +139,279 @@ angular.module('routerApp').controller('AccordionCtrl', function ($scope) {
  *                                                      客户列表页
  ********************************************************************************************************************/
 
-angular.module('customerlistMoudle',[]).controller('CustomerCtrl', function ($scope) {
-
-    $scope.customers=[
-        {
-            name:'娜娜科技有限公司',
-            cate:'年订单量100万',
-            task:'于6月21日在赛象酒店会面',
-            tags: [
-                {
-                    color:'danger',
-                    text:'手机'
-                },
-                {
-                    color:'info',
-                    text:'蓝牙'
-                }
-            ],
-            star: 1,
-            country:'美国',
-            date:'2041231198432'
-        },
-        {
-            name:'Nana tec',
-            cate:'年订单量100万',
-            task:'于6月21日在赛象酒店会面',
-            tags: [
-                {
-                    color:'danger',
-                    text:'电池'
-                },
-                {
-                    color:'info',
-                    text:'usp'
-                }
-            ],
-            star: 1,
-            country:'chinese',
-            date:'2043422198432'
-        },
-        {
-            name:'Nana tec',
-            cate:'年订单量100万',
-            task:'于6月21日在赛象酒店会面',
-            tags: [
-                {
-                    color:'danger',
-                    text:'电池'
-                },
-                {
-                    color:'info',
-                    text:'usp'
-                }
-            ],
-            star: 1,
-            country:'chinese',
-            date:'2043422198432'
-        },
-        {
-            name:'Nana tec',
-            cate:'年订单量100万',
-            task:'于6月21日在赛象酒店会面',
-            tags: [
-                {
-                    color:'danger',
-                    text:'电池'
-                },
-                {
-                    color:'info',
-                    text:'usp'
-                }
-            ],
-            star: 1,
-            country:'chinese',
-            date:'2043422198432'
+angular.module('customerlistMoudle',[]).controller('CustomerCtrl', function ($scope,$http,$uibModal,$alert) {
+     /* 顶部固定按钮 */
+    $scope.pinShow = false;
+    /* 栏目按钮显示隐藏 */
+    $scope.show = false;
+    $scope.allShow = false;
+    $scope.pinShowFunc = function(){
+        $scope.pinShow = !$scope.pinShow;
+    }
+    /* 根据数组值找到索引*/
+    function findIndex(current, obj){
+        for(var i in obj){
+            if (obj[i] == current) {
+                return i;
+            }
         }
-    ]
+    }    
+    /*分页*/
+    $scope.itemsPerPage = 5;
+    // $scope.totalItems = 6;
+    $scope.currentPage = 1;
+
+    /* 客户设置 */
+    $http({
+        url:'data/customerSet.json',
+        method:'GET'
+    }).success(function(data){
+        /* 分组 */
+        $scope.groups = data.groups;
+        /*客户状态*/
+        $scope.progress = data.progress;
+
+    })
+    /*线索*/
+    $http({
+        url:'data/customers.json',
+        method:'GET'
+    }).success(function(data){
+        $scope.customers=data.customers;   
+    })
+
+    /* 固定/取消固定 位置  ----栏目位置*/
+    $scope.pinItem = function(value){
+        value.isTop = !value.isTop;
+        $http({
+            method: 'POST',
+            url: 'http://localhost/angularcode/src/',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+            },
+            data: value
+        }).success(function(data){
+            console.log('success')
+        })
+        
+    }
+
+    /*标签过滤*/
+    $scope.tagSortfuc = function(value){
+        $scope.tagSort = value;
+    }
+    /*提示框*/
+    $scope.changeAlert = function(title="成功!",content="",type="info",duration=5){
+        $alert({title: title, content: content, type: type, show: true,duration:duration});
+    }
+    /*选择客户状态*/
+    $scope.selectProgress = function(value,progress){
+        value.progress = progress.value;
+        $http({
+            method: 'POST',
+            url: 'http://localhost/angularcode/src/',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+            },
+            data: value
+        }).success(function(data){
+           
+        })
+
+    }
+    /*转化为客户*/
+    $scope.changeCustomer = function(value){
+        var index = findIndex(value,$scope.customers);
+        // var index = $scope.customers.indexOf(value);
+        $scope.customers.splice(index,1);
+        
+        $http({
+            method: 'POST',
+            url: 'http://localhost/angularcode/src/',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+            },
+            data: value
+        }).success(function(data){
+            $scope.changeAlert('转化为客户成功！','请至<a ui-sref="web.customer" href="#/web/customer">我的客户</a>页面查看');
+        })
+        
+    }
+    /*转化为商机*/
+    $scope.changeBusiness = function(value){
+        var index = findIndex(value,$scope.customers);
+        // var index = $scope.customers.indexOf(value);
+        $scope.customers.splice(index,1);
+        $http({
+            method: 'POST',
+            url: 'http://localhost/angularcode/src/',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+            },
+            data: value
+        }).success(function(data){
+            $scope.changeAlert('转化为商机成功！','请至<a ui-sref="web.customer" href="#/web/customer">我的商机</a>页面查看');
+        })
+        
+    }
+    /* 多选框选择 */
+    $scope.checkArr = [];
+    $scope.isChecked = function(value){
+        if(value.isChecked){        //通过判断是否选中
+            $scope.checkArr.push(value);
+        }else{
+            var index = findIndex(value,$scope.checkArr);
+            // var index = $scope.checkArr.indexOf(value);
+            if(index != -1){
+                $scope.checkArr.splice(index,1);
+            }
+        }
+        
+    }
+
+    /***************************** 以下是顶部导航栏批量操作 **************************************/
+
+    /* 返回按钮，也就是清空整个数组，并且将选框的标记位设为false */
+    $scope.isCheckedNo = function(){
+        $scope.checkArr.splice(0,$scope.checkArr.length);   //清空数组
+        for(var i in $scope.customers){
+            $scope.customers[i].isChecked = false;      //去掉标记位
+        }
+    }
+    /* 全选操作 */
+    $scope.isCheckedAll = function(cur,per){
+        $scope.checkArr.splice(0,$scope.checkArr.length);
+            for(var i in $scope.customers){
+                $scope.checkArr.push($scope.customers[i]);
+                $scope.customers[i].isChecked = true;
+            }
+    }
+    /* 固定 ----批量操作*/
+    $scope.surePin = function(value){
+        for(var i in value){
+            var index = findIndex(value[i],$scope.customers);
+            $scope.customers[index].isTop = true;      //固定
+            $scope.customers[index].isChecked = false;  //去掉标记位，也就是去掉勾
+        }
+        $scope.checkArr.splice(0,$scope.checkArr.length);   //清空数组，也就是关闭顶部选框
+    }
+    /* 取消固定 ----批量操作*/
+    $scope.cancelPin = function(value){
+        for(var i in value){
+            var index = findIndex(value[i],$scope.customers);
+            $scope.customers[index].isTop = false;      //取消固定
+            $scope.customers[index].isChecked = false;  //去掉标记位，也就是去掉勾
+        }
+        $scope.checkArr.splice(0,$scope.checkArr.length);   //清空数组，也就是关闭顶部选框
+    }
+    /* 移动分组 ----批量操作 */
+    $scope.moveGroup = function(value,selected){
+        for(var i in value){
+            var index = findIndex(value[i],$scope.customers);
+            $scope.customers[index].group = selected.value;
+            $scope.customers[index].isChecked = false;  //去掉标记位
+        }
+        $scope.checkArr.splice(0,$scope.checkArr.length);   //关闭顶部导航栏
+    }
+    /* 删除栏目 ----批量操作 */
+    $scope.deleteClue = function(value){
+        var deleteConfirm = confirm('您确定要删除来之不易的线索信息吗？');
+        if(deleteConfirm){
+            for(var i in value){
+                var index = findIndex(value[i],$scope.customers);
+                $scope.customers.splice(index,1);   //删除
+                $scope.customers[index].isChecked = false;  //去掉标记位
+            }
+            $scope.checkArr.splice(0,$scope.checkArr.length);   
+        }
+    }
+    /*转化为客户 ----批量操作*/
+    $scope.changeCustomerAll = function(value){
+        for(var i in value){
+            var index = findIndex(value[i],$scope.customers);   //在customers中的索引
+            $scope.customers.splice(index,1);   //删除掉这条记录            
+            $scope.customers[index].isChecked = false;  //去掉标记位
+        }
+        /* 服务器发请求 */
+            $http({
+                method: 'POST',
+                url: 'http://localhost/angularcode/src/',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+                },
+                data: value
+            }).success(function(data){
+                $scope.changeAlert('转化为客户成功！','请至<a ui-sref="web.customer" href="#/web/customer">我的客户</a>页面查看');
+            })
+        $scope.checkArr.splice(0,$scope.checkArr.length); 
+        console.log($scope.checkArr)
+    }
+    /*转化为商机 ----批量操作*/
+    $scope.changeBusinessAll = function(value){
+        for(var i in value){
+            var index = findIndex(value[i],$scope.customers);   //在customers中的索引
+            $scope.customers.splice(index,1);   //删除掉这条记录
+            $scope.customers[index].isChecked = false;  //去掉标记位
+        }
+        /* 服务器发请求 */
+        $http({
+            method: 'POST',
+            url: 'http://localhost/angularcode/src/',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+            },
+            data: $scope.customers
+        }).success(function(data){
+            $scope.changeAlert('转化为商机成功！','请至<a ui-sref="web.customer" href="#/web/customer">我的商机</a>页面查看');
+        })
+        $scope.checkArr.splice(0,$scope.checkArr.length); 
+    }
+
+    /***************************** 以下是添加日程弹窗 *****************************/
+
+    /*日程单条数据 */
+    var date =  new Date();
+    today = date.getTime();
+    $scope.schedule = {"fromDate":today,"untilDate":today+172800,"remind":[{"date":today,}]};     //初始空数据
+    /* 客户设置 */
+    $http({
+        url:'data/customerSet.json',
+        method:'GET'
+    }).success(function(data){
+        /*  添加日程 --联系人 */
+        $scope.person = data.person;
+    })
+    /* 保存数据，并且添加到原始数据里 */
+    $scope.saveSchedule = function(value){
+        value.schedule.unshift($scope.schedule);
+        /* 发送数据到服务器 */
+        $http({
+                method: 'POST',
+                url: 'http://localhost/angularcode/src/',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+                },
+                data: value
+            }).success(function(data){
+               
+            })
+            
+        $scope.cancleSchedule();    
+    }
+    /* 清空日程弹出框数据 */
+    $scope.cancleSchedule = function(){  
+        $scope.schedule = {"fromDate":today,"untilDate":today,"remind":[{"date":today,}]};     //初始空数据
+    }
+    /* 添加日程提醒 */
+    $scope.remindadd = function(){
+        $scope.schedule.remind.push({});
+    }
+    /* 删除日程提醒 */
+    $scope.reminddel = function(index){
+        if ($scope.schedule.remind.length >1){
+            $scope.schedule.remind.splice(index,1);
+        }
+    }
 
 });
 
@@ -331,15 +528,15 @@ angular.module("detialMoudle", ['ngSanitize', 'ui.select']).controller('Customer
     /* 修改商机弹窗 */
     $scope.openBusiness = function (index) {
         var modalInstance = $uibModal.open({
-              animation: true,
-              backdrop:'static',
-              templateUrl: 'business.html',
-              controller: 'ModalBusinessCtrl',
-              resolve: {
+            animation: true,
+            backdrop:'static',
+            templateUrl: 'business.html',
+            controller: 'ModalBusinessCtrl',
+            resolve: {
                 business: function () {
-                  return $scope.customer.business[index];
+                    return $scope.customer.business[index];
                 }
-              }
+            }
         });
         
     }
@@ -369,6 +566,54 @@ angular.module("detialMoudle", ['ngSanitize', 'ui.select']).controller('Customer
     };
 
     /* 测试数据 */
+    /***************************** 以下是添加日程弹窗 *****************************/
+
+    
+    /*日程单条数据 */
+    var date =  new Date();
+    today = date.getTime();
+    $scope.schedule = {"fromDate":today,"untilDate":today+172800,"remind":[{"date":today,}]};     //初始空数据
+    /* 客户设置 */
+    $http({
+        url:'data/customerSet.json',
+        method:'GET'
+    }).success(function(data){
+        /*  添加日程 --联系人 */
+        $scope.person = data.person;
+    })
+    /* 保存数据，并且添加到原始数据里 */
+    $scope.saveSchedule = function(value){
+        value.schedule.unshift($scope.schedule);
+        /* 发送数据到服务器 */
+        $http({
+                method: 'POST',
+                url: 'http://localhost/angularcode/src/',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+                },
+                data: value
+            }).success(function(data){
+               
+            })
+            
+        $scope.cancleSchedule();    
+    }
+    /* 清空日程弹出框数据 */
+    $scope.cancleSchedule = function(){  
+        $scope.schedule = {"fromDate":today,"untilDate":today,"remind":[{"date":today,}]};     //初始空数据
+    }
+    /* 添加日程提醒 */
+    $scope.remindadd = function(){
+        $scope.schedule.remind.push({});
+    }
+    /* 删除日程提醒 */
+    $scope.reminddel = function(index){
+        if ($scope.schedule.remind.length >1){
+            $scope.schedule.remind.splice(index,1);
+        }
+    }
+
+
     
 });
 
@@ -546,7 +791,7 @@ angular.module('clueMoudle',[]).controller('ClueCtrl', function ($scope,$http,$u
             $scope.clues[i].isChecked = false;      //去掉标记位
         }
     }
-    /* 选择本页全部 *********************未完成*/
+    /* 全选操作 */
     $scope.isCheckedAll = function(cur,per){
         $scope.checkArr.splice(0,$scope.checkArr.length);
             for(var i in $scope.clues){
@@ -597,8 +842,10 @@ angular.module('clueMoudle',[]).controller('ClueCtrl', function ($scope,$http,$u
     $scope.changeCustomerAll = function(value){
         for(var i in value){
             var index = findIndex(value[i],$scope.clues);   //在clues中的索引
-            $scope.clues.splice(index,1);   //删除掉这条记录
-            /* 服务器发请求 */
+            $scope.clues.splice(index,1);   //删除掉这条记录            
+            $scope.clues[index].isChecked = false;  //去掉标记位
+        }
+        /* 服务器发请求 */
             $http({
                 method: 'POST',
                 url: 'http://localhost/angularcode/src/',
@@ -609,18 +856,49 @@ angular.module('clueMoudle',[]).controller('ClueCtrl', function ($scope,$http,$u
             }).success(function(data){
                 $scope.changeAlert('转化为客户成功！','请至<a ui-sref="web.customer" href="#/web/customer">我的客户</a>页面查看');
             })
-            
-            $scope.clues[index].isChecked = false;  //去掉标记位
-        }
         $scope.checkArr.splice(0,$scope.checkArr.length); 
+        console.log($scope.checkArr)
     }
     /*转化为商机 ----批量操作*/
     $scope.changeBusinessAll = function(value){
         for(var i in value){
             var index = findIndex(value[i],$scope.clues);   //在clues中的索引
             $scope.clues.splice(index,1);   //删除掉这条记录
-            /* 服务器发请求 */
-            $http({
+            $scope.clues[index].isChecked = false;  //去掉标记位
+        }
+        /* 服务器发请求 */
+        $http({
+            method: 'POST',
+            url: 'http://localhost/angularcode/src/',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+            },
+            data: $scope.clues
+        }).success(function(data){
+            $scope.changeAlert('转化为商机成功！','请至<a ui-sref="web.customer" href="#/web/customer">我的商机</a>页面查看');
+        })
+        $scope.checkArr.splice(0,$scope.checkArr.length); 
+    }
+
+    /***************************** 以下是添加日程弹窗 *****************************/
+
+    /*日程单条数据 */
+    var date =  new Date();
+    today = date.getTime();
+    $scope.schedule = {"fromDate":today,"untilDate":today+172800,"remind":[{"date":today,}]};     //初始空数据
+    /* 客户设置 */
+    $http({
+        url:'data/customerSet.json',
+        method:'GET'
+    }).success(function(data){
+        /*  添加日程 --联系人 */
+        $scope.person = data.person;
+    })
+    /* 保存数据，并且添加到原始数据里 */
+    $scope.saveSchedule = function(value){
+        value.schedule.unshift($scope.schedule);
+        /* 发送数据到服务器 */
+        $http({
                 method: 'POST',
                 url: 'http://localhost/angularcode/src/',
                 headers: {
@@ -628,14 +906,27 @@ angular.module('clueMoudle',[]).controller('ClueCtrl', function ($scope,$http,$u
                 },
                 data: value
             }).success(function(data){
-                $scope.changeAlert('转化为商机成功！','请至<a ui-sref="web.customer" href="#/web/customer">我的商机</a>页面查看');
+               
             })
             
-            $scope.clues[index].isChecked = false;  //去掉标记位
-        }
-        $scope.checkArr.splice(0,$scope.checkArr.length); 
+        $scope.cancleSchedule();    
     }
-});
+    /* 清空日程弹出框数据 */
+    $scope.cancleSchedule = function(){  
+        $scope.schedule = {"fromDate":today,"untilDate":today,"remind":[{"date":today,}]};     //初始空数据
+    }
+    /* 添加日程提醒 */
+    $scope.remindadd = function(){
+        $scope.schedule.remind.push({});
+    }
+    /* 删除日程提醒 */
+    $scope.reminddel = function(index){
+        if ($scope.schedule.remind.length >1){
+            $scope.schedule.remind.splice(index,1);
+        }
+    }
+
+})
 
 /********************************************************************************************************************
  *                                                      线索详情页
@@ -823,3 +1114,46 @@ angular.module('cluedetialMoudle').controller('ModalBusinessCtrl', function ($sc
         $uibModalInstance.dismiss('cancel');
     };
 });
+
+
+/********************************************************************************************************************
+ *                                                      商机列表页
+ ********************************************************************************************************************/
+angular.module("businessMoudle", []).controller('BusinessCtrl', function($scope, $http, $modal) {
+     $scope.modal = {
+      "title": "可以不",
+      "content": "原理!"
+    };
+
+    $scope.save = function(){
+        alert($scope.modal.title)
+    }
+
+    /* 客户设置 */
+    $http({
+        url:'data/customerSet.json',
+        method:'GET'
+    }).success(function(data){
+        /*  添加日程 --联系人 */
+        $scope.person = data.person;
+    })
+    /*日程单条数据*/
+    $scope.schedule = 
+        {
+            "selectPerson":"1",
+            "fromDate":509846400000,
+            "untilDate":519846400000,
+            "time":"2016-06-12 12:30",
+            "name":"李总",
+            "content":"复活节卡号即可付好款了回复返回发送客流",
+            "remind":[
+                {
+                    "date":512846400000
+                },
+                {
+                    "date":514846400000
+                }
+            ]
+        }
+
+})

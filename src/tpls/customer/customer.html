@@ -1,6 +1,6 @@
-<div ng-controller="ClueCtrl">
+<div ng-controller="CustomerCtrl">
     <h1 class="page-header">
-        线索
+        客户
         <button class="btn btn-primary" ng-click="tagSortfuc({isTop:true});pinShowFunc()" data-animation="am-flip-x" data-placement="bottom" bs-tooltip data-title="选择固定位置" ng-class="{true: 'pin-show', false: 'pin-hide'}[!pinShow]"> <i class="fa fa-thumb-tack fa-lg" ></i>
         </button>
         <button class="btn btn-primary" ng-click="tagSortfuc();pinShowFunc()" data-animation="am-flip-x" data-placement="bottom" bs-tooltip data-title="取消固定位置" ng-class="{true: 'pin-show', false: 'pin-hide'}[pinShow]"> <i class="fa fa-thumb-tack fa-lg rotate-45"></i>
@@ -139,7 +139,7 @@
 <!-- /.row -->
 <hr>
 
-<div class="row cus-item fade-pin" ng-repeat="clue in clues | orderBy:col:desc | filter: tagSort | offset: (currentPage-1)*itemsPerPage | limitTo:itemsPerPage" ng-mouseenter="show = true" ng-mouseleave="show = false">
+<div class="row cus-item fade-pin" ng-repeat="customer in customers | orderBy:col:desc | filter: tagSort | offset: (currentPage-1)*itemsPerPage | limitTo:itemsPerPage" ng-mouseenter="show = true" ng-mouseleave="show = false">
     <div class="col-md-12">
         <div class="row">
             <div class="col-md-4 col-xs-12">
@@ -147,25 +147,25 @@
                     <div class="col-xs-1">
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" ng-change="isChecked(clue)" ng-model="clue.isChecked">
+                                <input type="checkbox" ng-change="isChecked(customer)" ng-model="customer.isChecked">
                                 <span></span>
                             </label>
                         </div>
                     </div>
                     <!-- /.col-xs-2 -->
                     <div class="col-xs-3">
-                        <a ui-sref="web.cluedetial({id:clue.id})" ng-bind="clue.name"></a>
+                        <a ui-sref="web.customerdetial({id:customer.id})" ng-bind="customer.name"></a>
                     </div>
                     <!-- /.col-xs-4 -->
                     <div class="col-xs-4">
-                        {{progress[clue.progress].label}}
+                        {{progress[customer.progress].label}}
                         <a href="" data-animation="am-flip-x" bs-dropdown aria-haspopup="true" aria-expanded="false" placement="bottom">
                             <i class="fa fa-edit fa-lg"></i>
                         </a>
                         <ul class="dropdown-menu" role="menu">
                             <li ng-repeat="progre in progress">
 
-                                <a href="" ng-click="selectProgress(clue,progre,false)">
+                                <a href="" ng-click="selectProgress(customer,progre,false)">
                                     <i class="fa fa-user"></i>
                                     {{progre.label}}
                                 </a>
@@ -174,7 +174,7 @@
                     </div>
                     <!-- /.col-xs-3 -->
                     <div class="col-xs-3">
-                        <p ng-bind="groups[clue.group].label"></p>
+                        <p ng-bind="groups[customer.group].label"></p>
                     </div>
                     <!-- /.col-xs-3 --> </div>
                 <!-- /.row --> </div>
@@ -182,68 +182,60 @@
             <!-- /.col-md-1 -->
             <div class="col-md-2 col-xs-12">
                 <div class="cus-star">
-                    <uib-rating ng-model="clue.star" max="5" state-on="'glyphicon-star'" state-off="'glyphicon-star-empty'" aria-labelledby="custom-icons-1"></uib-rating>
+                    <uib-rating ng-model="customer.star" max="5" state-on="'glyphicon-star'" state-off="'glyphicon-star-empty'" aria-labelledby="custom-icons-1"></uib-rating>
                 </div>
             </div>
             <!-- /.col-md-1 -->
             <div class="col-md-1 col-xs-3">
-                <p ng-bind="clue.people"></p>
+                <p ng-bind="customer.people"></p>
             </div>
             <!-- /.col-md-1 -->
             <div class="col-md-2 col-xs-5">
-                <p ng-bind="clue.email"></p>
+                <p ng-bind="customer.email"></p>
             </div>
             <!-- /.col-md-1 -->
             <div class="col-md-1 col-xs-4">
-                <p ng-bind="clue.country"></p>
+                <p ng-bind="customer.country"></p>
             </div>
             <!-- /.col-md-1 -->
             <div class="col-md-2 col-xs-12"  ng-class="{true: 'pin-show', false: 'pin-hide'}[!show]">
                 <div class="row">
                     <div class="col-xs-8">
-                        <p ng-bind="clue.date | time"></p>
+                        <p ng-bind="customer.date | time"></p>
                     </div>
                     <!-- /.col-xs-8 -->
                     <div class="col-xs-4">
-                        <p><i class="fa fa-thumb-tack fa-lg top-icon" ng-class="{true: 'pin-icon', false: 'unpin-icon'}[clue.isTop]"></i></p>
+                        <p><i class="fa fa-thumb-tack fa-lg top-icon" ng-class="{true: 'pin-icon', false: 'unpin-icon'}[customer.isTop]"></i></p>
                     </div>
-                    <!-- /.col-md-4 --> </div>
+                    <!-- /.col-md-3 --> </div>
                 <!-- /.row --> </div>
             <!-- /.col-md-1 -->
             <div class="col-md-2 col-xs-12 cus-ctrl"  ng-class="{true: 'pin-show', false: 'pin-hide'}[show]">
                 <div class="row">
-                    <div class="col-xs-4">
-                        <p><a href="" style="margin-right: 5px;" ng-click="pinItem(clue)" data-animation="am-flip-x" data-placement="bottom" bs-tooltip data-title="固定/取消">
-                            <i class="fa fa-thumb-tack fa-lg  top-icon" ng-class="{true: 'pin-icon', false: 'unpin-icon'}[clue.isTop]"></i>
+                    <div class="col-xs-3">
+                        <p><a href="" style="margin-right: 5px;" ng-click="pinItem(customer)" data-animation="am-flip-x" data-placement="bottom" bs-tooltip data-title="固定/取消">
+                            <i class="fa fa-thumb-tack fa-lg  top-icon" ng-class="{true: 'pin-icon', false: 'unpin-icon'}[customer.isTop]"></i>
                         </a></p>
                     </div>
-                    <!-- /.col-xs-4 -->
-                    <div class="col-xs-4">
-                        <p><a ui-sref="web.cluedetial({id:clue.id})" style="margin-right: 5px;" data-animation="am-flip-x" data-placement="bottom" bs-tooltip data-title="编辑">
+                    <!-- /.col-xs-3 -->
+                    <div class="col-xs-3">
+                        <p><a ui-sref="web.customerdetial({id:customer.id})" style="margin-right: 5px;" data-animation="am-flip-x" data-placement="bottom" bs-tooltip data-title="编辑">
                             <i class="fa fa-edit fa-lg top-icon"></i>
                         </a></p>
                     </div>
-                    <!-- /.col-xs-4 -->
-                    <div class="col-xs-4">
-                        <a href="" data-animation="am-flip-x" bs-dropdown aria-haspopup="true" aria-expanded="false" placement="bottom-right" >
-                            <i class="fa fa-exchange fa-lg top-icon" data-animation="am-flip-x" data-placement="bottom" bs-tooltip data-title="转化"></i>
-                        </a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li>
-                                <a href="" ng-click="changeCustomer(clue)">
-                                    <i class="fa fa-user"></i>
-                                    转化为客户
-                                </a>
-                            </li>
-                            <li>
-                                <a href="" ng-click="changeBusiness(clue)">
-                                    <i class="fa fa-globe"></i>
-                                    转化为商机
-                                </a>
-                            </li>
-                        </ul>
+                    <!-- /.col-xs-3 -->
+                    <div class="col-xs-3">
+                        <p><a ui-sref="web.customerdetial({id:customer.id})" style="margin-right: 5px;" data-animation="am-flip-x" data-placement="bottom" bs-tooltip data-title="编辑">
+                            <i class="fa fa-edit fa-lg top-icon"></i>
+                        </a></p>
                     </div>
-                    <!-- /.col-xs-4 --> </div>
+                    <!-- /.col-xs-3 -->
+                    <div class="col-xs-3">
+                        <p><a ui-sref="web.customerdetial({id:customer.id})" style="margin-right: 5px;" data-animation="am-flip-x" data-placement="bottom" bs-tooltip data-title="编辑">
+                            <i class="fa fa-edit fa-lg top-icon"></i>
+                        </a></p>
+                    </div>
+                    <!-- /.col-xs-3 --> </div>
                 <!-- /.row --> </div>
         </div>
     </div>
@@ -252,14 +244,14 @@
         <div class="row">
             <div class="col-md-6">
                 最新日程：
-                <span ng-bind="clue.schedule[0].fromDate|schetime" style="margin-right: 5px;"></span>
-                <span ng-bind="clue.schedule[0].content"></span>
+                <span ng-bind="customer.schedule[0].fromDate|schetime" style="margin-right: 5px;"></span>
+                <span ng-bind="customer.schedule[0].content"></span>
                 <a href="" style="margin-left: 15px;"  data-animation="am-fade-and-scale" placement="center" data-template-url="schedule.tpl.html" bs-modal ng-click="">
                     <i class="fa fa-plus fa-lg"></i>
                 </a>
             </div>
             <div class="col-md-6">
-                <a href="" style="margin-right: 5px;"  ng-repeat="tag in clue.tags">
+                <a href="" style="margin-right: 5px;"  ng-repeat="tag in customer.tags">
                     <span class="label label-{{tag.color}}" ng-click=" tagSortfuc(tag.text) ">{{tag.text}}</span>
                 </a>
             </div>
@@ -269,7 +261,7 @@
 
 </div>
 <!-- /.row -->
-<uib-pagination total-items="clues.length" ng-model="currentPage" max-size="5" class="pagination-sm" boundary-links="true" rotate="false" items-per-page="itemsPerPage" num-pages="numPages" ng-show="clues.length>
+<uib-pagination total-items="customers.length" ng-model="currentPage" max-size="5" class="pagination-sm" boundary-links="true" rotate="false" items-per-page="itemsPerPage" num-pages="numPages" ng-show="customers.length>
     itemsPerPage" next-text="下一页" previous-text="上一页" first-text="首页" last-text="尾页">
 </uib-pagination>
 
@@ -355,7 +347,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" ng-click="cancleSchedule();$hide()">关闭</button>
-                <button type="button" class="btn btn-primary" ng-click="saveSchedule(clue);$hide()" ng-disabled="scheduleForm.$invalid">保存</button>
+                <button type="button" class="btn btn-primary" ng-click="saveSchedule(customer);$hide()" ng-disabled="scheduleForm.$invalid">保存</button>
             </div>
         </div>
         </div>

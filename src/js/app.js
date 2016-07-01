@@ -1,4 +1,15 @@
-var routerApp = angular.module('routerApp', ['ngAnimate','ui.router', 'ngGrid','detialMoudle','customerlistMoudle','clueMoudle','cluedetialMoudle','mgcrea.ngStrap', 'ui.bootstrap']);   //'mgcrea.ngStrap',
+var routerApp = angular.module('routerApp', [
+        'ngAnimate',
+        'ui.router',
+        'ngGrid',
+        'mgcrea.ngStrap',
+        'ui.bootstrap',
+        'detialMoudle',
+        'customerlistMoudle',
+        'clueMoudle',
+        'cluedetialMoudle',
+        'businessMoudle'
+        ]);   //'mgcrea.ngStrap',
 
 
 
@@ -63,24 +74,25 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
             url: '/web',
             templateUrl: 'tpls/nav.html'
         })
-        .state('web.customer', {
-            url: '/customer',
-            templateUrl: 'tpls/customer/content.html'
-        })
         .state('web.clue', {
             url: '/clue',
             templateUrl: 'tpls/customer/clue.html'
-        })
-        .state('web.listcustomer', {
-            url: '/listcustomer',
-            templateUrl: 'tpls/customer/list.html'
-        })
-        .state('web.customerdetial', {
-            url: '/customerdetial/:id',
-            templateUrl: 'tpls/customer/detial.html'
         })
         .state('web.cluedetial', {
             url: '/cluedetial/:id',
             templateUrl: 'tpls/customer/cluedetial.html'
         })
+        .state('web.customer', {
+            url: '/customer',
+            templateUrl: 'tpls/customer/customer.html'
+        })
+        .state('web.customerdetial', {
+            url: '/customerdetial/:id',
+            templateUrl: 'tpls/customer/customerdetial.html'
+        })
+        .state('web.business', {
+            url: '/business',
+            templateUrl: 'tpls/customer/business.html'
+        })
+        
 });
