@@ -1,0 +1,406 @@
+.nav, .pagination, .carousel, .panel-title a {
+    cursor: pointer;
+}
+.gridStyle {
+    border: 1px solid rgb(212, 212, 212);
+    height: 300px
+}
+
+/**
+ * ************************************************************************************************
+ *                                            页面切换动画
+ * ************************************************************************************************
+ */
+.page {
+	-webkit-transition: all  .6s;
+    -o-transition: all  .6s;
+    transition: all  .6s;
+}
+
+
+.page.ng-enter,
+.page.ng-leave{
+    opacity:0;
+    transform: translate(0,20px);
+}
+
+.page.ng-enter-active{
+    opacity:1;
+    transform: translate(0,0);
+}
+
+/**
+ * ************************************************************************************************
+ *                                            侧边菜单 menu
+ * ************************************************************************************************
+ */
+.menu-default {
+  border:0;
+  background-color: #3A3F51;
+}
+.menu-default:first-child{
+  margin-top: 20px;
+}
+.menu-default  h4 > a {
+  display: block;
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  text-decoration: none;
+  color: #D8D9DB;
+}
+.menu-default  h4 > a:hover,
+.menu-default  h4 > a:focus {
+  color: #1797BE;
+}
+.menu-default  h4 > a:focus {
+  outline: none;
+}
+.menu-default .panel-heading{
+  padding: 0 20px;
+  border-radius: 0;
+  background-color: #3A3F51;
+}
+.menu-default .panel-heading i{
+  display: inline-block;
+  width: 2em;
+  font-size: 18px;
+  line-height: 1;
+  position: relative;
+  top: 3px;
+}
+.menu-default .panel-body{
+    border: 0 !important;
+    padding: 0;
+    background-color: #4B4D5D;
+}
+
+/* Sidebar navigation */
+.nav-sidebar {
+  margin: 10px 0;
+}
+.nav-sidebar > li{
+  
+}
+.nav-sidebar > li > a {
+  display: block;
+  padding-left: 60px;
+  color: #D8D9DB;
+  letter-spacing: .025em;
+}
+.nav-sidebar > li > a i{
+  display: inline-block;
+  width: 2em;
+  font-size: 18px;
+  line-height: 1;
+  position: relative;
+  top: 3px;
+}
+.nav-sidebar > li > a:hover,
+.nav-sidebar > li > a:focus {
+   color: #1797BE;
+   background-color: #4B4D5D;
+}
+.nav-sidebar > .active > a,
+.nav-sidebar > .active > a:hover,
+.nav-sidebar > .active > a:focus {
+  color: #1797BE;
+}
+
+/**
+ * ************************************************************************************************
+ *                                            客户页面
+ * ************************************************************************************************
+ */
+
+.label{
+  display: inline-block;
+  margin-bottom: 3px;
+}
+.cus-star{
+  color: #F0AD4E;
+  font-size: 18px;
+  cursor: pointer;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.cus-item{
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  padding-top:12px;
+  background-color: #fff;
+  box-shadow: 0 0 1px #ccc,2px 2px 4px #ddd;
+}
+
+.fade-pin {
+    opacity: 1;
+}
+.fade-pin.ng-enter {
+    -webkit-transition: all .3s .3s;
+    transition: all .3s .3s;
+    opacity: 0;
+}
+.fade-pin.ng-enter-active {
+    opacity: 1;
+}
+.fade-pin.ng-leave {
+    -webkit-transition: all .3s;
+    transition: all .3s;
+    opacity: 1;
+}
+.fade-pin.ng-leave-active {
+    opacity: 0;
+}
+
+
+/*客户详情页*/
+/* 通用边框 */
+.cus-border{
+	border: 1px solid #e6e6e6;
+	padding: 30px 20px 20px 20px;
+	position: relative;
+	margin-bottom: 30px;
+  margin-top: 30px;
+  background-color: #fff;
+}
+.cus-txt{
+	position: absolute;
+	top: -20px;
+	left: 15px;
+	display: inline-block;
+	width: 105px;
+	background-color: #fff;
+}
+.cus-txt h4{
+	text-align: center;
+}
+/* tab 切换*/
+.tab-pane.am-fade {
+  animation-duration: .5s;
+  animation-timing-function: ease;
+  animation-fill-mode: backwards;
+  opacity: 1;
+}
+
+.tab-pane.am-fade.active-remove {
+  display: none !important;
+}
+
+.tab-pane.am-fade.active-add {
+  animation-name: fadeIn;
+}
+.nav-tabs{
+  font-size: 14px;
+}
+/* message */
+.msg-btn{
+	position: absolute;
+	right: 30px;
+	top: 20px;
+	cursor: pointer;
+}
+.msg-btn .fa-check{
+	color: #27C24C;
+}
+/*联系人*/
+.cus-people{
+	border: 2px dashed #ccc;
+	border-radius: 10px;
+	margin-top: 10px;
+	margin-bottom: 20px;
+	padding:20px;
+  z-index: 100;
+}
+.cus-btn{
+	position: absolute;
+	right: 3px;
+	top: 100px;
+}
+.cus-btn .dis,
+.cus-btn .add,
+.cus-btn .del{
+	display: block;
+	width: 25px;
+	height: 25px;
+	text-align: center;
+	background-color: #333;
+	color: #fff;
+	padding: 6px;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	-ms-border-radius: 50%;
+	border-radius: 50%;
+	cursor: pointer;
+	margin-top: -20px;
+}
+.cus-btn .del,
+.cus-btn .add{
+	margin-top: 50px;
+}
+.cus-btn .col{
+	font-size: 28px;
+	position: absolute;
+	right: 40px;
+	top: -60px;
+	cursor: pointer;
+  color: #FBBD08;
+}
+.cus-btn .fa-check{
+	background-color: #27C24C;
+}
+
+/* 日程 */
+.cus-sche{
+	padding: 20px;
+	background-color: #f5f5f5;
+	margin-bottom: 10px;
+}
+.sche-add{
+	text-align: center;
+	cursor: pointer;
+}
+/* 商机 */
+.cus-business{
+	padding: 20px;
+	margin-bottom: 10px;
+	background-color: #f5f5f5;
+}
+/**
+ * ************************************************************************************************
+ *                                            线索和客户列表页面
+ * ************************************************************************************************
+ */
+.h-sort{
+  cursor: pointer;
+}
+/**
+ * 提示框
+ */
+.alert{
+    position: fixed;
+    right: 10px;
+    top: 62px;
+}
+.alert .close{
+  margin-top: -4px;
+  margin-left: 10px;
+}
+.alert-info{
+  background-color: #fff;
+  border: 0;
+  border-radius: 1px;
+  box-shadow: 0 0 1px #ccc,2px 2px 4px #ddd;
+  color: #333;
+}
+/**
+ * ************************************************************************************************
+ *                                            线索和客户列表页面
+ * ************************************************************************************************
+ */
+
+/*顶部显示选择框*/
+.select-h{
+  width: 100%;
+  height: 0px;
+  background-color: #3A3F51;
+  color: #fff;
+  position: fixed;
+  left: 0;
+  top: -51px;
+  z-index: 2000;
+  -webkit-transition:all .5s;
+  -moz-transition:all .5s;
+  -o-transition:all .5s;
+  transition:all .5s;
+}
+.select-h-active{
+  height: 51px;
+  top: 0;
+}
+.select-h-close{  
+  top:-51px;
+  height: 0;
+  overflow: hidden;
+}
+.select-h p{
+  height: 50px;
+  line-height: 50px;
+  margin: 0;
+  font-size: 14px;
+  cursor: pointer;
+}
+.select-h p > a{
+  color: #fff;
+}
+.select-h p > a:hover{
+  color: #23B7E5;
+}
+.select-h .dropdown-menu{
+  top: 49px !important;
+  left:-58px !important;
+}
+.top-icon{
+  position: relative;
+  top: 2px;
+  margin-right: 10px;
+  font-size: 20px;
+}
+.top-change{
+  height: 50px;
+  line-height: 50px !important;
+}
+.top-change a{
+  color:#fff;
+  cursor:pointer
+}
+.top-change a:hover{
+  color:#23B7E5;
+}
+/* 栏目右侧按钮*/
+.cus-ctrl a{
+  color: #555;
+}
+.cus-ctrl a:hover{
+  color: #23B7E5;
+
+}
+.rotate-45{
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.cus-ctrl a:nth-of-type(1) > i.rotate-45{
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.cus-ctrl a:nth-of-type(1):hover > i.rotate-45{
+  -webkit-transform: rotate(0);
+  -moz-transform: rotate(0);
+  -ms-transform: rotate(0);
+  transform: rotate(0)
+}
+/* 固定按钮 */
+.pin-show,
+.pin-hide{
+  border-radius: 50%;
+
+}
+.pin-icon{
+    color: #23B7E5;
+}
+.unpin-icon{
+  color: #555;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.pin-show{
+  display: inline-block;
+}
+.pin-hide{
+  display: none;
+}

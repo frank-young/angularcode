@@ -1,0 +1,38 @@
+{
+    "groups": [
+            {"value":"0","label":"年销售20w"},
+            {"value":"1","label":"年销售50w"},
+            {"value":"2","label":"年销售100w"},
+            {"value":"3","label":"年销售200w"},
+            {"value":"4","label":"年销售500w"}
+        ],
+    "origins":[
+            {"value":"0","label":"谷歌推广"},
+            {"value":"1","label":"官方网站"},
+            {"value":"2","label":"展会"}
+        ],
+    "states":["美国","中国","澳大利亚","越南"],
+    "sts":["手机生产","电脑生产","蓝牙设备"],
+    "tags": [
+        { "name": "手机"},
+        { "name": "蓝牙"},
+        { "name": "电子设备"},
+        { "name": "平板"},
+        { "name": "笔记本" }
+    ],
+    "progress":[
+            {"value":"0","label":"初步交流"},
+            {"value":"1","label":"深度交流"},
+            {"value":"2","label":"完成订单"}
+        ],
+    "class":[
+            {"value":"0","label":"生产商"},
+            {"value":"1","label":"供应商"},
+            {"value":"2","label":"销售商"}
+        ],
+    "person": [
+            {"value":"0","label":"frank"},
+            {"value":"1","label":"json"},
+            {"value":"2","label":"联系人3"}
+        ]
+}
