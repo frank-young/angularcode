@@ -1,0 +1,41 @@
+{
+        "companyName":"",
+        "website":"",
+        "group":"",
+        "origin":"",
+        "country":"",
+        "address":"",
+        "star": 0,
+        "tags":[],
+        "progress":"",     
+        "mobile":"",
+        "email":"",
+        "fax":"",
+        "class":"",        
+        "st":"",     
+        "remark":"",
+        "date":"",
+        "isEdit": true,
+        "peoples":[
+            {
+                "name":"",
+                "email":"",
+                "sex":"",   
+                "birthed":"",
+                "phone":"",
+                "position":"",
+                "remark":"",
+                "isImportant":true,
+                "isEdit":true
+            }
+        ],
+        "schedule":[],
+        "schedule_expired":[],
+        "schedule_complete":[],
+        "business":[
+            {
+                "time":"",
+                "content":""
+            }
+        ]
+    }

@@ -1,0 +1,72 @@
+<div class="row cus-border">
+    <div class="msg-btn">
+        <span ng-class="{true: 'fa-edit', false: 'fa-check'}[customer.isEdit]" class="fa dis fa-2x" ng-click="customer.isEdit=!customer.isEdit" ng-model="people.isEdit" ></span>
+    </div>
+    <div class="col-sm-12 cus-txt">
+        <h4>项目详情</h4>
+    </div>
+    <!-- /.col-md-12 -->
+    <div class="col-sm-5">
+        <div class="form-group">
+            <label class="col-sm-3 control-label">负责人</label>
+            <div class="col-sm-9 " ng-class="{'has-danger': customerForm.people.$invalid}" >
+                <input type="text" class="form-control " ng-disabled="customer.isEdit" placeholder="负责人（必填）" ng-model="customer.people" name="people" required ng-trim="true" ng-maxlength="50" required ng-maxlength="100">
+            </div>
+        </div>
+        <!-- /.form-group -->
+        <div class="form-group">
+            <label class="col-sm-3 control-label">客户</label>
+            <div class="col-sm-9"  ng-class="{'has-danger': customerForm.company.$invalid}" >
+                <button type="button" class="form-control form-select" ng-model="customer.company" data-html="1"  data-toggle="true" bs-options="com.value as com.label for com in company" placeholder="客户" ng-disabled="customer.isEdit"   data-animation="am-flip-x" bs-select>
+                    客户<span class="caret"></span>
+                </button>
+            </div>
+        </div>
+        <!-- /.form-group -->
+        <div class="form-group">
+            <label class="col-sm-3 control-label">状态</label>
+            <div class="col-sm-9">
+                <button type="button" class="form-control form-select" ng-model="customer.status" data-html="1"  data-toggle="true" bs-options="statu.value as statu.label for statu in status" ng-disabled="customer.isEdit" placeholder="状态" data-animation="am-flip-x" bs-select>
+                    状态<span class="caret"></span>
+                </button>
+            </div>
+        </div>
+        <!-- /.form-group --></div>
+    <!-- /.col-md-5 -->
+
+    <div class="col-sm-5 col-md-offset-1">
+        <div class="form-group">
+            <label class="col-sm-3 control-label">项目名称</label>
+            <div class="col-sm-9" ng-class="{'has-danger': customerForm.bname.$invalid}">
+                <input type="text" name="bname" class="form-control" ng-disabled="customer.isEdit" placeholder="项目名称" ng-model="customer.bname" required ng-maxlength="100"></div>
+        </div>
+        <!-- /.form-group -->
+        <div class="form-group">
+            <label class="col-sm-3 control-label">项目金额</label>
+            <div class="col-sm-9" ng-class="{'has-danger': customerForm.amount.$invalid}">
+                <input type="amount" name="amount" class="form-control" ng-disabled="customer.isEdit" placeholder="项目金额" ng-model="customer.amount" ng-maxlength="100"></div>
+        </div>
+        <!-- /.form-group -->
+        <div class="form-group">
+            <label class="col-sm-3 control-label">项目来源</label>
+            <div class="col-sm-9">
+                <button type="button" class="form-control form-select" ng-model="customer.origin" data-html="1" data-toggle="true" bs-options="origin.value as origin.label for origin in origins" ng-disabled="customer.isEdit" placeholder="项目来源" data-animation="am-flip-x" bs-select>
+                    项目来源<span class="caret"></span> <!-- <i class="fa fa-sort-down fa-lg"></i> -->
+                </button>
+            </div>
+        </div>
+        <!-- /.form-group --> </div>
+    <!-- /.col-md-5 -->
+    <div class="col-md-12">
+        <div class="form-group">
+            <label class="col-sm-1 control-label">备注</label>
+            <div class="col-sm-10" style="padding-left:45px;">
+                <textarea name="" id="" cols="30" rows="5" class="form-control" ng-disabled="customer.isEdit" ng-model="customer.remark"></textarea>
+            </div>
+        </div>
+        <!-- /.form-group --> </div>
+    <div class="col-md-11 col-md-offset-1">
+        <button class="btn btn-success" ng-show="!customer.isEdit" ng-click="customer.isEdit=!customer.isEdit" ng-disabled="customerForm.$invalid">保存</button>
+    </div>
+</div>
+<!-- /.row -->

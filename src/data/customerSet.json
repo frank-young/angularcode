@@ -30,9 +30,16 @@
             {"value":"1","label":"供应商"},
             {"value":"2","label":"销售商"}
         ],
+
     "person": [
             {"value":"0","label":"frank"},
             {"value":"1","label":"json"},
             {"value":"2","label":"联系人3"}
+        ],
+    "status":[
+            {"value":"0","label":"签订合同"},
+            {"value":"1","label":"进行中"},
+            {"value":"2","label":"项目失败"},
+            {"value":"3","label":"项目完成"}
         ]
 }

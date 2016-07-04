@@ -352,7 +352,16 @@ input[type='checkbox']:checked+ span:after{
   background-color: #EE3D3D;
   border-color: #EE3D3D;
 }
-
+/* tab标签 */
+.nav-tabs>li.active>a, 
+.nav-tabs>li.active>a:focus, 
+.nav-tabs>li.active>a:hover {
+    color: #f5f5f5;
+    cursor: default;
+    background-color: #5d9cec;
+    border: 1px solid #f5f7fa;
+    border-bottom-color: transparent;
+}
 /*
  * Global add-ons
  */
@@ -495,4 +504,16 @@ input[type='checkbox']:checked+ span:after{
 
 .ui-select-search{
   width: 20px !important;
+}
+
+/***************************自定义公共样式***********************************/
+.border-radius{
+  border-radius: 50%;
+
+}
+.ml-10{
+  margin-left: 10px;
+}
+.ml-20{
+  margin-left: 20px;
 }

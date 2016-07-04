@@ -1,100 +1,321 @@
-
-<h1 class="page-header">这是商机列表页</h1>
 <div ng-controller="BusinessCtrl">
+    <h1 class="page-header">
+        项目
+        <button class="btn btn-primary" ng-click="tagSortfuc({isTop:true});pinShowFunc()" data-animation="am-flip-x" data-placement="bottom" bs-tooltip data-title="选择固定位置" ng-class="{true: 'pin-show', false: 'pin-hide'}[!pinShow]"> <i class="fa fa-thumb-tack fa-lg" ></i>
+        </button>
+        <button class="btn btn-primary" ng-click="tagSortfuc();pinShowFunc()" data-animation="am-flip-x" data-placement="bottom" bs-tooltip data-title="取消固定位置" ng-class="{true: 'pin-show', false: 'pin-hide'}[pinShow]"> <i class="fa fa-thumb-tack fa-lg rotate-45"></i>
+        </button>
+        <button class="btn btn-primary border-radius ml-10 btn-radius" ng-click='tagSortfuc()' data-animation="am-flip-x" data-placement="bottom" bs-tooltip data-title="显示全部"> <i class="fa fa-tag fa-lg"></i>
+        </button>
 
+    </h1>
+    <div class="select-h select-h-close" ng-class="{true: 'select-h-active', false: 'select-h-close'}[checkArr.length!=0]">
 
-<!-- You can use a custom html template with the `data-template` attr -->
-<button type="button" class="btn btn-lg btn-danger"  data-animation="am-fade-and-scale" placement="center" data-template-url="business.tpl.html" bs-modal="modal" >Custom Modal
-  <br>
-  <small>(using data-template)</small>
-</button>
+        <div class="col-sm-2 col-xs-3">
+            <p ng-click="isCheckedNo()" style="overflow: hidden;">
+                <i class="fa fa-angle-left fa-2x top-icon"></i>
+                返回
+            </p>
+        </div>
+        <!-- /.col-xs-1 -->
+        <div class="col-sm-7 hidden-xs">
+            <p>
+                已选: {{checkArr.length}}
+                <a href="" style="margin-left: 20px;" ng-click="isCheckedAll()">全选</a>
+                <a href="" style="margin-left: 20px;" ng-click="isCheckedNo()">取消全选</a>
+            </p>
+        </div>
+        <!-- /.col-xs-9 -->
+        <div class="col-sm-3 col-xs-9" >
+            <div class="row">
+                <div class="col-xs-2">
+                    <p>
+                        <a href="" ng-click="surePin(checkArr)" data-animation="am-flip-x" data-placement="bottom" bs-tooltip data-title="固定位置">
+                            <i class="fa fa-thumb-tack fa-2x top-icon"></i>
+                        </a>
+                    </p>
+                </div>
+                <!-- /.col-xs-2 -->
+                <div class="col-xs-2">
+                    <p>
+                        <a href="" ng-click="cancelPin(checkArr)" data-animation="am-flip-x" data-placement="bottom" bs-tooltip data-title="取消固定位置">
+                            <i class="fa fa-thumb-tack fa-2x top-icon rotate-45"></i>
+                        </a>
+                    </p>
+                </div>
+                <!-- /.col-xs-2 -->
+                <div class="col-xs-2">
+                    <div class="top-change">
+                        <a  data-animation="am-flip-x" bs-dropdown aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-folder fa-lg top-icon" data-animation="am-flip-x" data-placement="bottom" bs-tooltip data-title="移动分组"></i>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li ng-repeat="group in groups">
+                                <a href="" ng-click="moveGroup(checkArr,group)">
+                                    <i class="fa fa-chevron-right "></i>
+                                    {{group.label}}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- /.col-xs-2 -->
+
+                <div class="col-xs-2">
+                    <p>
+                        <a href="" ng-click="deleteClue(checkArr)" data-animation="am-flip-x" data-placement="bottom" bs-tooltip data-title="删除">
+                            <i class="fa fa-trash fa-2x top-icon"></i>
+                        </a>
+                    </p>
+                </div>
+                <!-- /.col-xs-2 --> </div>
+            <!-- /.row --> </div>
+        <!-- /.col-xs-2 --> </div>
+
+    <div class="row hidden-xs hidden-sm">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-4 col-xs-12">
+                    <div class="row">
+                        <div class="col-xs-1">
+                            <div class="checkbox">
+                                <!-- <label>
+                                <input type="checkbox" ng-click="isCheckedAll()">
+
+                                <span></span>
+                            </label>
+                            -->
+                        </div>
+                    </div>
+                    <!-- /.col-xs-1 -->
+                    <div class="col-xs-5">
+                        <span class="h-sort" ng-click="col='name';desc=!desc">
+                            项目名
+                        </span>
+                    </div>
+                    <!-- /.col-xs-5 -->
+                    <div class="col-xs-5">公司</div>
+                    <!-- /.col-xs-5 --></div>
+
+                <!-- /.row --> </div>
+
+            <div class="col-md-1 col-xs-12" >状态</div>
+            <!-- /.col-md-1 -->
+            <div class="col-md-2 col-xs-6">来源
+            </div>
+            <!-- /.col-md-1 -->
+            <div class="col-md-2 col-xs-6">商机金额
+            </div>
+            <!-- /.col-md-1 -->
+            <div class="col-md-1 col-xs-6">负责人</div>
+            <!-- /.col-md-1 -->
+            <div class="col-md-2 col-xs-12">
+                <span class="h-sort" ng-click="col='date';desc=!desc">
+                    创建时间
+                    <i class="fa fa-sort"></i>
+                </span>
+            </div>
+            <!-- /.col-md-1 --> </div>
+    </div>
+    <!-- /.col-md-12 -->
+</div>
+<!-- /.row -->
+<hr>
+
+<div class="row cus-item fade-pin" ng-repeat="busines in business | orderBy:col:desc | filter: tagSort | offset: (currentPage-1)*itemsPerPage | limitTo:itemsPerPage" ng-mouseenter="show = true" ng-mouseleave="show = false">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-4 col-xs-12">
+                <div class="row">
+                    <div class="col-xs-1">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" ng-change="isChecked(busines)" ng-model="busines.isChecked">
+                                <span></span>
+                            </label>
+                        </div>
+                    </div>
+                    <!-- /.col-xs-2 -->
+                    <div class="col-xs-5">
+                        <p ng-bind="busines.bname"></p>
+                    </div>
+                    <!-- /.col-xs-4 -->
+                    <div class="col-xs-5">
+                        <a ui-sref="web.businessdetial({id:busines.id})" ng-bind="company[busines.company].label"></a>
+                    </div>
+                    <!-- /.col-xs-5 --> </div>
+                <!-- /.row --> </div>
+            <!-- /.col-md-4 -->
+
+            <div class="col-md-1 col-xs-12">
+                	{{status[busines.status].label}}
+                        <a href="" data-animation="am-flip-x" bs-dropdown aria-haspopup="true" aria-expanded="false" placement="bottom">
+                            <i class="fa fa-edit fa-lg"></i>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li ng-repeat="statu in status">
+
+                                <a href="" ng-click="selectStatus(busines,statu,false)">
+                                    <i class="fa fa-user"></i>
+                                    {{statu.label}}
+                                </a>
+                            </li>
+                        </ul>
+            </div>
+            <!-- /.col-md-1 -->
+            <div class="col-md-2 col-xs-3">
+                <p ng-bind="origins[busines.origins].label"></p>
+            </div>
+            <!-- /.col-md-1 -->
+            <div class="col-md-2 col-xs-5">
+                <p ng-bind="busines.amount"></p>
+            </div>
+            <!-- /.col-md-1 -->
+            <div class="col-md-1 col-xs-4">
+                <p ng-bind="busines.people"></p>
+            </div>
+            <!-- /.col-md-1 -->
+            <div class="col-md-2 col-xs-12"  ng-class="{true: 'pin-show', false: 'pin-hide'}[!show]">
+                <div class="row">
+                    <div class="col-xs-8">
+                        <p ng-bind="busines.date | time"></p>
+                    </div>
+                    <!-- /.col-xs-8 -->
+                    <div class="col-xs-4">
+                        <p><i class="fa fa-thumb-tack fa-lg top-icon" ng-class="{true: 'pin-icon', false: 'unpin-icon'}[busines.isTop]"></i></p>
+                    </div>
+                    <!-- /.col-md-4 --> </div>
+                <!-- /.row --> </div>
+            <!-- /.col-md-1 -->
+            <div class="col-md-2 col-xs-12 cus-ctrl"  ng-class="{true: 'pin-show', false: 'pin-hide'}[show]">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <p><a href="" style="margin-right: 5px;" ng-click="pinItem(busines)" data-animation="am-flip-x" data-placement="bottom" bs-tooltip data-title="固定/取消">
+                            <i class="fa fa-thumb-tack fa-lg  top-icon" ng-class="{true: 'pin-icon', false: 'unpin-icon'}[busines.isTop]"></i>
+                        </a></p>
+                    </div>
+                    <!-- /.col-xs-4 -->
+                    <div class="col-xs-4">
+                        <p><a ui-sref="web.businessdetial({id:busines.id})" style="margin-right: 5px;" data-animation="am-flip-x" data-placement="bottom" bs-tooltip data-title="编辑">
+                            <i class="fa fa-edit fa-lg top-icon"></i>
+                        </a></p>
+                    </div>
+                    <!-- /.col-xs-4 -->
+                    <div class="col-xs-4">
+                        <p><a ui-sref="web.businessdetial({id:busines.id})" style="margin-right: 5px;" data-animation="am-flip-x" data-placement="bottom" bs-tooltip data-title="编辑">
+                            <i class="fa fa-edit fa-lg top-icon"></i>
+                        </a></p>
+                    </div>
+                    <!-- /.col-xs-4 --> </div>
+                <!-- /.row --> </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+
+        <div class="row">
+            <div class="col-md-12">
+                最新日程：
+                <span ng-bind="busines.schedule[0].fromDate|schetime" style="margin-right: 5px;"></span>
+                <span ng-bind="busines.schedule[0].content"></span>
+                <a href="" style="margin-left: 15px;"  data-animation="am-fade-and-scale" placement="center" data-template-url="schedule.tpl.html" bs-modal ng-click="">
+                    <i class="fa fa-plus fa-lg"></i>
+                </a>
+            </div>
+        </div>
+
+    </div>
 
 </div>
+<!-- /.row -->
+<uib-pagination total-items="business.length" ng-model="currentPage" max-size="5" class="pagination-sm" boundary-links="true" rotate="false" items-per-page="itemsPerPage" num-pages="numPages" ng-show="business.length>
+    itemsPerPage" next-text="下一页" previous-text="上一页" first-text="首页" last-text="尾页">
+</uib-pagination>
 
-<script type="text/ng-template" id="business.tpl.html">
+</div>
+<script type="text/ng-template" id="schedule.tpl.html">
+    <div class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" style="margin-top: 100px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" ng-click="cancleSchedule();$hide()">&times;</button>
+                    <h4 class="modal-title">添加日程</h4>
+                </div>
+                <div class="modal-body" >
+                    <form name="scheduleForm">
+                        <div class="row">
+                            <div class="col-sm-12" style="margin-bottom:20px;line-height: 34px;">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">关联联系人</label>
+                                    <div class="col-sm-5">
+                                        <button type="button" class="form-control form-select" ng-model="schedule.selectPerson" data-html="1" data-toggle="true" bs-options="per.value as per.label for per in person" placeholder="请选择联系人" data-animation="am-flip-x" bs-select required name="selectPerson" ng-class="{'has-danger': scheduleForm.selectPerson.$invalid}">
+                                            <span class="caret"></span>
+                                        </button>
+                                    </div>
+                                    <!-- <div class="col-sm-4">         
+                                    <div class="checkbox" style="margin-top: 6px;line-height: 20px;">
+                                        <label>
+                                            <input type="checkbox">         
+                                            全天日程
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                -->
+                            </div>
+                        </div>
 
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header" ng-show="title">
-					<button type="button" class="close" ng-click="$hide()">&times;</button>
-					<h4 class="modal-title" ng-bind-html="title"></h4>
-				</div>
-				<div class="modal-body" ng-show="content">
-					<form name="scheduleForm">
-						<div class="row">
-							<div class="col-sm-12" style="margin-bottom:20px;line-height: 34px;">
-								<div class="form-group">
-									<label class="col-sm-2 control-label">关联联系人</label>
-									<div class="col-sm-5">
-										<button type="button" class="form-control form-select" ng-model="schedule.selectPerson" data-html="1" data-toggle="true" bs-options="per.value as per.label for per in person" placeholder="请选择联系人" data-animation="am-flip-x" bs-select >
-											<span class="caret"></span>
-										</button>
-									</div>
-									<!-- <div class="col-sm-4">			
-									<div class="checkbox" style="margin-top: 6px;line-height: 20px;">
-										<label>
-											<input type="checkbox">			
-											全天日程
-											<span></span>
-										</label>
-									</div>
-								</div>
-								-->
-							</div>
-						</div>
+                        <div class="col-sm-12" style="margin-bottom:20px; line-height: 34px;">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">起止日期</label>
+                                <div class="col-sm-4" ng-class="{'has-danger': scheduleForm.fromDate.$invalid}">
+                                    <input type="text" name="fromDate" class="form-control" ng-model="schedule.fromDate" data-max-date="{{schedule.untilDate}}" placeholder="开始日期" data-date-format="yyyy-MM-dd" data-date-type="number" data-animation="am-flip-x" required bs-datepicker></div>
+                                <div class="col-sm-1">
+                                    <p class="text-center">至</p>
+                                </div>
+                                <div class="col-sm-4" ng-class="{'has-danger': scheduleForm.untilDate.$invalid}">
+                                    <input type="text" name="untilDate" class="form-control" ng-model="schedule.untilDate" data-min-date="{{schedule.fromDate}}" placeholder="结束日期" data-date-format="yyyy-MM-dd" data-date-type="number" data-animation="am-flip-x" required bs-datepicker></div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12" style="margin-bottom:20px; line-height: 34px;">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">提醒日期</label>
 
-						<div class="col-sm-12" style="margin-bottom:20px; line-height: 34px;">
-							<div class="form-group">
-								<label class="col-sm-2 control-label">起止日期</label>
-								<div class="col-sm-4" ng-class="{'has-danger': scheduleForm.fromDate.$invalid}">
-									<input type="text" name="fromDate" class="form-control" ng-model="schedule.fromDate" data-max-date="{{schedule.untilDate}}" placeholder="开始日期" data-date-format="yyyy-MM-dd" data-date-type="number" data-animation="am-flip-x" required bs-datepicker></div>
-								<div class="col-sm-1">
-									<p class="text-center">至</p>
-								</div>
-								<div class="col-sm-4" ng-class="{'has-danger': scheduleForm.untilDate.$invalid}">
-									<input type="text" name="untilDate" class="form-control" ng-model="schedule.untilDate" data-min-date="{{schedule.fromDate}}" placeholder="结束日期" data-date-format="yyyy-MM-dd" data-date-type="number" data-animation="am-flip-x" required bs-datepicker></div>
-							</div>
-						</div>
-						<div class="col-sm-12" style="margin-bottom:20px; line-height: 34px;">
-							<div class="form-group">
-								<label class="col-sm-2 control-label">提醒日期</label>
-
-								<div class="col-sm-10">
-									<div class="row" ng-repeat="remind in schedule.remind">
-										<div class="col-xs-10" style="margin-bottom:15px;" ng-class="{'has-danger': scheduleForm.remindDate{{$index}}.$invalid}">
-											<input type="text" name="remindDate{{$index}}" class="form-control" ng-model="remind.date" data-min-date="{{schedule.fromDate}}" data-max-date="{{schedule.untilDate}}" placeholder="提醒日期" data-date-format="yyyy-MM-dd" data-date-type="number" data-animation="am-flip-x" required bs-datepicker></div>
-										<!-- /.col-xs-10 -->			
-										<div class="col-xs-1">
-											<a href="" ng-click="remindadd()"> <i class="fa fa-plus fa-lg" style="cursor:pointer"></i>
-											</a>
-										</div>
-										<!-- /.col-xs-1 -->			
-										<div class="col-xs-1">
-											<a href="" ng-click="reminddel()"> <i class="fa fa-minus fa-lg" style="cursor:pointer"></i>
-											</a>
-										</div>
-										<!-- /.col-xs-1 -->			
-									</div>
-									<!-- /.row -->			
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-12">
-							<div class="form-group">
-								<label class="col-sm-2 control-label">日程内容</label>
-								<div class="col-sm-10" ng-class="{'has-danger': scheduleForm.scheContent.$invalid}">
-									<textarea name="scheContent" cols="20" rows="5" class="form-control" placeholder="请输入日程" ng-model="schedule.content" required ng-maxlength="200"></textarea>
-								</div>
-							</div>
-						</div>
-					</div>
-				</form>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" ng-click="$hide()">Close</button>
-				<button type="button" class="btn btn-primary" ng-click="save()">Save changes</button>
-			</div>
-		</div>
-		</div>
-
+                                <div class="col-sm-10">
+                                    <div class="row" ng-repeat="remind in schedule.remind">
+                                        <div class="col-xs-10" style="margin-bottom:15px;" ng-class="{'has-danger': scheduleForm.remindDate{{$index}}.$invalid}">
+                                            <input type="text" name="remindDate{{$index}}" class="form-control" ng-model="remind.date" data-min-date="{{schedule.fromDate}}" data-max-date="{{schedule.untilDate}}" placeholder="提醒日期" data-date-format="yyyy-MM-dd" data-date-type="number" data-animation="am-flip-x" required bs-datepicker></div>
+                                        <!-- /.col-xs-10 -->            
+                                        <div class="col-xs-1">
+                                            <a href="" ng-click="remindadd()"> <i class="fa fa-plus fa-lg" style="cursor:pointer"></i>
+                                            </a>
+                                        </div>
+                                        <!-- /.col-xs-1 -->         
+                                        <div class="col-xs-1">
+                                            <a href="" ng-click="reminddel()"> <i class="fa fa-minus fa-lg" style="cursor:pointer"></i>
+                                            </a>
+                                        </div>
+                                        <!-- /.col-xs-1 -->         
+                                    </div>
+                                    <!-- /.row -->          
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">日程内容</label>
+                                <div class="col-sm-10" ng-class="{'has-danger': scheduleForm.scheContent.$invalid}">
+                                    <textarea name="scheContent" cols="20" rows="5" class="form-control" placeholder="请输入日程" ng-model="schedule.content" required ng-maxlength="200"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" ng-click="cancleSchedule();$hide()">关闭</button>
+                <button type="button" class="btn btn-primary" ng-click="saveSchedule(business);$hide()" ng-disabled="scheduleForm.$invalid">保存</button>
+            </div>
+        </div>
+        </div>
+    </div>
 </script>

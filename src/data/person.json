@@ -1,0 +1,7 @@
+{
+	"person": [
+            {"value":"0","label":"联系人1"},
+            {"value":"1","label":"联系人2"},
+            {"value":"2","label":"联系人3"}
+        ]
+}

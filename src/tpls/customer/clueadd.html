@@ -1,0 +1,13 @@
+<h1 class="page-header">添加潜在客户</h1>
+
+<div ng-controller="ClueAddCtrl">
+
+    <form class="form-horizontal" name="customerForm" novalidate>
+
+        <div ng-include="'tpls/common/customerAdd.html'"></div>
+		
+		<div class="col-md-11 col-md-offset-1">
+        	<button class="btn btn-success" ng-click="customer.isEdit=!customer.isEdit" ng-disabled="customerForm.$invalid">保存</button>
+    	</div>
+    </form>
+</div>

@@ -155,12 +155,12 @@
 /*客户详情页*/
 /* 通用边框 */
 .cus-border{
-	border: 1px solid #e6e6e6;
 	padding: 30px 20px 20px 20px;
 	position: relative;
 	margin-bottom: 30px;
-  margin-top: 30px;
+  margin-top: 40px;
   background-color: #fff;
+  box-shadow: 0 0 1px #ccc,2px 2px 4px #ddd;
 }
 .cus-txt{
 	position: absolute;
@@ -169,6 +169,7 @@
 	display: inline-block;
 	width: 105px;
 	background-color: #fff;
+  box-top: 1px solid #ccc;
 }
 .cus-txt h4{
 	text-align: center;
@@ -383,7 +384,8 @@
 }
 /* 固定按钮 */
 .pin-show,
-.pin-hide{
+.pin-hide,
+.border-radius{
   border-radius: 50%;
 
 }
@@ -402,4 +404,9 @@
 }
 .pin-hide{
   display: none;
+}
+/*单个移动分组*/
+.per-froup{
+  top:24px !important;
+  left:-110px !important;
 }

@@ -1,3 +1,4 @@
+ <!-- 日程 -->
  <div class="row cus-border">
      <div class="col-sm-12 cus-txt">
          <h4>日程</h4>
@@ -315,3 +316,241 @@
         </div>
     </div>
 </script>
+
+<!-- 客户资料 -->
+<div class="row cus-border">
+ <!--    <div class="msg-btn">
+        <span ng-class="{true: 'fa-edit', false: 'fa-check'}[customer.isEdit]" class="fa dis fa-2x" ng-click="customer.isEdit=!customer.isEdit" ng-model="people.isEdit" ></span>
+    </div> -->
+    <div class="col-sm-12 cus-txt">
+        <h4>客户资料</h4>
+    </div>
+    <!-- /.col-md-12 -->
+    <div class="col-sm-5">
+        <div class="form-group">
+            <label class="col-sm-3 control-label">公司名称</label>
+            <div class="col-sm-9 " ng-class="{'has-danger': customerForm.companyName.$invalid}" >
+                <input type="text" class="form-control " placeholder="公司名称（必填）" ng-model="customer.companyName" name="companyName" required ng-trim="true" ng-maxlength="50">
+            </div>
+        </div>
+        <!-- /.form-group -->
+        <div class="form-group">
+            <label class="col-sm-3 control-label">网站</label>
+            <div class="col-sm-9"  ng-class="{'has-danger': customerForm.website.$invalid}" >
+                <input type="text" name="website" class="form-control" placeholder="网站" ng-model="customer.website" ng-maxlength="50"></div>
+        </div>
+        <!-- /.form-group -->
+        <div class="form-group">
+            <label class="col-sm-3 control-label">分组</label>
+            <div class="col-sm-9">
+                <button type="button" class="form-control form-select" ng-model="customer.group" data-html="1" data-toggle="true" bs-options="group.value as group.label for group in groups" placeholder="分组" data-animation="am-flip-x" bs-select>
+                    分组<span class="caret"></span>
+                </button>
+            </div>
+        </div>
+        <!-- /.form-group -->
+        <div class="form-group">
+            <label class="col-sm-3 control-label">客户来源</label>
+            <div class="col-sm-9">
+                <button type="button" class="form-control form-select" ng-model="customer.origin" data-html="1" data-toggle="true" bs-options="origin.value as origin.label for origin in origins" placeholder="客户来源" data-animation="am-flip-x" bs-select>
+                    客户来源<span class="caret"></span> <!-- <i class="fa fa-sort-down fa-lg"></i> -->
+                </button>
+            </div>
+        </div>
+        <!-- /.form-group -->
+        <div class="form-group">
+            <label class="col-sm-3 control-label">国家/地区</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" ng-model="customer.country" bs-options="state for state in states" placeholder="国家/地区" data-animation="am-flip-x" bs-typeahead >
+            </div>
+        </div>
+        <!-- /.form-group -->
+        <div class="form-group">
+            <label class="col-sm-3 control-label">联系地址</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" placeholder="联系地址" ng-model="customer.address" ></div>
+        </div>
+        <!-- /.form-group -->
+        <div class="form-group">
+            <label class="col-sm-3 control-label">主营业务</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" ng-model="customer.st" bs-options="st for st in sts" placeholder="主营业务" data-animation="am-flip-x" bs-typeahead >
+            </div>
+        </div>
+        <!-- /.form-group --> </div>
+    <!-- /.col-md-5 -->
+
+    <div class="col-sm-5 col-md-offset-1">
+        <div class="form-group">
+            <button class="col-sm-3 control-label" data-animation="am-flip-x" data-placement="top-left" title="客户星级" data-content="点击选择客户星级" data-trigger="focus" bs-popover >
+                客户星级
+                <i class="fa fa-question-circle" aria-hidden="true"></i>
+            </button>
+            <div class="col-sm-9">
+                <div class="cus-star">
+                    <uib-rating ng-model="customer.star" max="5" state-on="'glyphicon-star'" state-off="'glyphicon-star-empty'" aria-labelledby="custom-icons-1"></uib-rating>
+                </div>
+            </div>
+        </div>
+        <!-- /.form-group -->
+        <div class="form-group">
+            <label class="col-sm-3 control-label">客户标签</label>
+            <div class="col-sm-9">
+                <ui-select multiple tagging="tagTransform" ng-model="customer.tags" theme="bootstrap" title="选择标签" style="width: 100%;" >
+                    <ui-select-match placeholder="选择标签">{{$item.name}}</ui-select-match>
+                    <ui-select-choices repeat="tag in tags | propsFilter: {name: $select.search}">
+                        <div ng-if="tag.isTag" ng-bind-html="(tag.name | highlight: $select.search) +' (新添)'"></div>
+                        <div ng-if="!tag.isTag" ng-bind-html="tag.name + tag.isTag| highlight: $select.search"></div>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+        </div>
+        <!-- /.form-group -->
+        <div class="form-group">
+            <label class="col-sm-3 control-label">客户状态</label>
+            <div class="col-sm-9">
+                <button type="button" class="form-control form-select" ng-model="customer.progress" data-html="1" data-toggle="true" bs-options="progre.value as progre.label for progre in progress" placeholder="客户状态" data-animation="am-flip-x" bs-select>
+                    客户状态<span class="caret"></span>
+                </button>
+            </div>
+        </div>
+        <!-- /.form-group -->
+        <div class="form-group">
+            <label class="col-sm-3 control-label">联系电话</label>
+            <div class="col-sm-9" ng-class="{'has-danger': customerForm.mobile.$invalid}">
+                <input type="text" name="mobile" class="form-control" placeholder="联系电话" ng-model="customer.mobile" ng-maxlength="20"></div>
+        </div>
+        <!-- /.form-group -->
+        <div class="form-group">
+            <label class="col-sm-3 control-label">邮箱</label>
+            <div class="col-sm-9" ng-class="{'has-danger': customerForm.email.$invalid}">
+                <input type="email" name="email" class="form-control" placeholder="邮箱" ng-model="customer.email" required ng-maxlength="50"></div>
+        </div>
+        <!-- /.form-group -->
+        <div class="form-group">
+            <label class="col-sm-3 control-label">传真</label>
+            <div class="col-sm-9" ng-class="{'has-danger': customerForm.fax.$invalid}">
+                <input type="text" name="fax" class="form-control" placeholder="传真" ng-model="customer.fax" ng-maxlength="20"></div>
+        </div>
+        <!-- /.form-group -->
+        
+        <div class="form-group">
+            <label class="col-sm-3 control-label">客户类型</label>
+            <div class="col-sm-9">
+                <button type="button" class="form-control form-select" ng-model="customer.class" data-html="1" data-toggle="true" bs-options="cls.value as cls.label for cls in class" placeholder="客户状态" data-animation="am-flip-x" bs-select>
+                    客户状态<span class="caret"></span>
+                </button>
+            </div>
+        </div>
+        <!-- /.form-group --> </div>
+    <!-- /.col-md-5 -->
+    <div class="col-md-12">
+        <div class="form-group">
+            <label class="col-sm-1 control-label">备注</label>
+            <div class="col-sm-10" style="padding-left:45px;">
+                <textarea name="" id="" cols="30" rows="5" class="form-control" ng-model="customer.remark"></textarea>
+            </div>
+        </div>
+        <!-- /.form-group --> </div>
+    
+</div>
+<!-- /.row -->
+
+<!-- 联系人 -->
+<div class="row cus-border">
+    <div class="col-md-12 cus-txt">
+        <h4>联系人</h4>
+    </div>
+    <div class="col-md-12 "  ng-repeat="people in customer.peoples">
+        <div class="cus-people">
+            <div class="cus-btn">
+                <span  ng-class="{true: 'fa-star', false: 'fa-star-o'}[people.isImportant]" class="fa col" ng-click="people.isImportant = !people.isImportant" ng-model="people.isImportant"></span>
+
+                <span class="fa fa-minus del" ng-click="cusdel($index)"></span>
+                <span class="fa fa-plus add" ng-click="cusadd()"></span>
+            </div>
+            <div class="row">
+                <div class="col-sm-5">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">姓名</label>
+                        <div class="col-sm-9" ng-class="{'has-danger': customerForm.personName{{$index}}.$invalid}">
+                            <input type="text" name="personName{{$index}}" class="form-control" placeholder="姓名" ng-model="people.name" required ng-maxlength="50"></div>
+                    </div>
+                </div>
+                <!-- /.col-sm-5 -->
+                <div class="col-sm-5 col-sm-offset-1">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">邮箱</label>
+                        <div class="col-sm-9" ng-class="{'has-danger': customerForm.personMail{{$index}}.$invalid}">
+                            <input type="email" name="personMail{{$index}}" class="form-control" placeholder="邮箱" ng-model="people.email" required ng-maxlength="50"></div>
+                    </div>
+                </div>
+                <!-- /.col-sm-5 -->
+                <div class="col-sm-5">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">性别</label>
+                        <div class="col-sm-9">
+                            <button type="button" class="form-control form-select" ng-model="people.sex" data-html="1" data-toggle="true" bs-options="sex.value as sex.label for sex in sexs" placeholder="请选择性别" data-animation="am-flip-x" bs-select>
+                                <span class="caret"></span> <!-- <i class="fa fa-sort-down fa-lg"></i> -->
+                            </button>
+<!--                             <div class="radio">
+                                <label>
+                                    <input type="radio" class="" name="sex{{$index}}" checked="{{people.sex}}">
+                                    男
+                                    <span></span>
+                                </label>
+                            </div> -->
+                        </div>
+<!--                         <div class="col-xs-2">
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" class="" name="sex{{$index}}" checked="{{!people.sex}}">
+                                    女
+                                    <span></span>
+                                </label>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+                <!-- /.col-sm-5 -->
+                <div class="col-sm-5 col-sm-offset-1">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">生日</label>
+                        <div class="col-sm-9" ng-class="{'has-danger': customerForm.personBirthed{{$index}}.$invalid}">
+                             <input type="text" name="personBirthed{{$index}}" class="form-control"  data-date-format="yyyy-MM-dd" data-date-type="number" data-min-date="02/10/86" data-max-date="today" data-autoclose="1"  ng-model="people.birthed" placeholder="生日" data-animation="am-flip-x" bs-datepicker>
+                         </div>
+                    </div>
+                </div>
+                <!-- /.col-sm-5 -->
+                <div class="col-sm-5">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">联系方式</label>
+                        <div class="col-sm-9" ng-class="{'has-danger': customerForm.personMobile{{$index}}.$invalid}">
+                            <input type="text" name="personMobile{{$index}}" class="form-control" placeholder="联系方式" ng-model="people.phone" ng-maxlength="20"></div>
+                    </div>
+                </div>
+                <!-- /.col-sm-5 -->
+                <div class="col-sm-5 col-sm-offset-1">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">职位</label>
+                        <div class="col-sm-9" ng-class="{'has-danger': customerForm.personPosition{{$index}}.$invalid}">
+                            <input type="text" name="personPosition{{$index}}" class="form-control" placeholder="职位" ng-model="people.position" ng-maxlength="50"></div>
+                    </div>
+                </div>
+                <!-- /.col-sm-5 -->
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label">备注</label>
+                        <div class="col-sm-10"  style="padding-left:45px;">
+                            <textarea name="" id="" cols="20" rows="5" class="form-control" ng-model="people.remark"></textarea>
+                        </div>
+                    </div>
+                    <!-- /.col-sm-11 --> </div>
+                <!-- /.row --> </div>
+        </div>
+    </div>
+    <!-- /.col-md-12 -->
+</div>
+<!-- /.row -->
+
+    

@@ -5,6 +5,10 @@
         </button>
         <button class="btn btn-primary" ng-click="tagSortfuc();pinShowFunc()" data-animation="am-flip-x" data-placement="bottom" bs-tooltip data-title="取消固定位置" ng-class="{true: 'pin-show', false: 'pin-hide'}[pinShow]"> <i class="fa fa-thumb-tack fa-lg rotate-45"></i>
         </button>
+        <button class="btn btn-primary border-radius ml-10 btn-radius" ng-click='tagSortfuc()' data-animation="am-flip-x" data-placement="bottom" bs-tooltip data-title="显示全部"> <i class="fa fa-tag fa-lg"></i>
+        </button>
+        <a ui-sref="web.customeradd()" class="btn btn-danger border-radius ml-10"  data-animation="am-flip-x" data-placement="bottom" bs-tooltip data-title="添加客户"> <i class="fa fa-plus fa-lg"></i>
+                </a>
 
     </h1>
     <div class="select-h select-h-close" ng-class="{true: 'select-h-active', false: 'select-h-close'}[checkArr.length!=0]">
@@ -19,8 +23,8 @@
         <div class="col-sm-7 hidden-xs">
             <p>
                 已选: {{checkArr.length}}
-                <a href="" style="margin-left: 20px;" ng-click="isCheckedAll()">全选</a>
-                <a href="" style="margin-left: 20px;" ng-click="isCheckedNo()">取消全选</a>
+                <a href="" class="ml-20" ng-click="isCheckedAll()">全选</a>
+                <a href="" class="ml-20" ng-click="isCheckedNo()">取消全选</a>
             </p>
         </div>
         <!-- /.col-xs-9 -->
@@ -56,23 +60,6 @@
                             </li>
                         </ul>
                     </div>
-                </div>
-                <!-- /.col-xs-2 -->
-                <div class="col-xs-2">
-                    <p>
-                        <a href="" ng-click="changeCustomerAll(checkArr)">
-                            <i class="fa fa-user fa-lg top-icon" data-animation="am-flip-x" data-placement="bottom" bs-tooltip data-title="转化为客户"></i>
-                        </a>
-                    </p>
-
-                </div>
-                <!-- /.col-xs-2 -->
-                <div class="col-xs-2">
-                    <p>
-                        <a href="" ng-click="changeBusinessAll(checkArr)">
-                            <i class="fa fa-globe fa-lg top-icon" data-animation="am-flip-x" data-placement="bottom" bs-tooltip data-title="转化为商机"></i>
-                        </a>
-                    </p>
                 </div>
                 <!-- /.col-xs-2 -->
                 <div class="col-xs-2">
@@ -119,7 +106,7 @@
             <div class="col-md-2 col-xs-12" >星级</div>
             <!-- /.col-md-1 -->
             <div class="col-md-1 col-xs-6">
-                <p ng-click='tagSortfuc()' style="cursor:pointer;">联系人</p>
+                <p >联系人</p>
             </div>
             <!-- /.col-md-1 -->
             <div class="col-md-2 col-xs-12">邮箱</div>
@@ -212,30 +199,32 @@
             <!-- /.col-md-1 -->
             <div class="col-md-2 col-xs-12 cus-ctrl"  ng-class="{true: 'pin-show', false: 'pin-hide'}[show]">
                 <div class="row">
-                    <div class="col-xs-3">
+                    <div class="col-xs-4">
                         <p><a href="" style="margin-right: 5px;" ng-click="pinItem(customer)" data-animation="am-flip-x" data-placement="bottom" bs-tooltip data-title="固定/取消">
                             <i class="fa fa-thumb-tack fa-lg  top-icon" ng-class="{true: 'pin-icon', false: 'unpin-icon'}[customer.isTop]"></i>
                         </a></p>
                     </div>
-                    <!-- /.col-xs-3 -->
-                    <div class="col-xs-3">
+                    <!-- /.col-xs-4 -->
+                    <div class="col-xs-4">
                         <p><a ui-sref="web.customerdetial({id:customer.id})" style="margin-right: 5px;" data-animation="am-flip-x" data-placement="bottom" bs-tooltip data-title="编辑">
                             <i class="fa fa-edit fa-lg top-icon"></i>
                         </a></p>
                     </div>
-                    <!-- /.col-xs-3 -->
-                    <div class="col-xs-3">
-                        <p><a ui-sref="web.customerdetial({id:customer.id})" style="margin-right: 5px;" data-animation="am-flip-x" data-placement="bottom" bs-tooltip data-title="编辑">
-                            <i class="fa fa-edit fa-lg top-icon"></i>
-                        </a></p>
+                    <!-- /.col-xs-4 -->
+                    <div class="col-xs-4">
+                        <a href="" data-animation="am-flip-x" bs-dropdown aria-haspopup="true" aria-expanded="false"  data-placement="bottom">
+                            <i class="fa fa-folder fa-lg top-icon" data-animation="am-flip-x" bs-tooltip data-title="移动分组"></i>
+                        </a>
+                        <ul class="dropdown-menu per-froup" role="menu">
+                            <li ng-repeat="group in groups">
+                                <a href="" ng-click="perMoveGroup(customer,group)">
+                                    <i class="fa fa-chevron-right "></i>
+                                    {{group.label}}
+                                </a>
+                            </li>
+                        </ul>
                     </div>
-                    <!-- /.col-xs-3 -->
-                    <div class="col-xs-3">
-                        <p><a ui-sref="web.customerdetial({id:customer.id})" style="margin-right: 5px;" data-animation="am-flip-x" data-placement="bottom" bs-tooltip data-title="编辑">
-                            <i class="fa fa-edit fa-lg top-icon"></i>
-                        </a></p>
-                    </div>
-                    <!-- /.col-xs-3 --> </div>
+                    <!-- /.col-xs-4 --> </div>
                 <!-- /.row --> </div>
         </div>
     </div>
