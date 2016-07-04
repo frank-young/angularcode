@@ -11,7 +11,8 @@ var routerApp = angular.module('routerApp', [
         'cluedetialMoudle',
         'clueaddMoudle',
         'businessMoudle',
-        'businessdetialMoudle'
+        'businessdetialMoudle',
+        'businessaddMoudle'
         ]);   //'mgcrea.ngStrap',
 
 

@@ -37,6 +37,17 @@ a:focus, a:hover {
 ::-webkit-resizer {
     display: none;
 }
+.dropdown-menu>li>a {
+    color: #666;
+    font-size: 12px;
+}
+.dropdown-menu>li>a:hover{
+    color: #666;
+}
+.dropdown-menu>li>a:focus{
+    background-color: #5D9CEC;
+    color: #fff;
+}
 
 /**
  * input 输入框

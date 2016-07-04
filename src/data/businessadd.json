@@ -1,0 +1,18 @@
+{
+    "company":"",
+    "bname":"",
+    "origin":"",
+    "status":"",     
+    "mobile":"",
+    "email":"",
+    "class":"",
+    "amount":"",
+    "remark":"",
+    "date":0,
+    "isEdit": true,
+    "people":"杨军",
+    "schedule":[],
+    "schedule_expired":[],
+    "schedule_complete":[],
+    "business":[]
+}

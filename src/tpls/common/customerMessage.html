@@ -76,7 +76,7 @@
         <div class="form-group">
             <label class="col-sm-3 control-label">客户标签</label>
             <div class="col-sm-9">
-                <button type="button" class="form-control form-select" ng-model="customer.tags" data-html="1"  data-toggle="true" bs-options="tag.value as tag.label for tag in tags" ng-disabled="customer.isEdit" placeholder="客户标签" max-length="4"  max-length-html="个客户" all-text="全选" none-text="取消全选" all-none-buttons="1"  data-animation="am-flip-x" bs-select>
+                <button type="button" class="form-control form-select" ng-model="customer.tags" data-html="1" data-multiple="1" data-toggle="true" bs-options="tag.value as tag.text for tag in tags" ng-disabled="customer.isEdit" placeholder="客户标签" max-length="4"  max-length-html="个标签" all-text="全选" none-text="取消全选" all-none-buttons="1"  data-animation="am-flip-x" bs-select>
                     客户标签<span class="caret"></span>
                 </button>
 

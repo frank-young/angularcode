@@ -48,6 +48,7 @@
   line-height: 40px;
   text-decoration: none;
   color: #D8D9DB;
+  font-size: 14px;
 }
 .menu-default  h4 > a:hover,
 .menu-default  h4 > a:focus {

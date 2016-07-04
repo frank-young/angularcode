@@ -8,20 +8,7 @@
             "name":"A娜娜科技",
             "progress":0,
             "task":"于6月21日在赛象酒店会面",
-            "tags": [
-                {
-                    "color":"danger",
-                    "text":"手机--A"
-                },
-                {
-                    "color":"info",
-                    "text":"B"
-                },
-                {
-                    "color":"info",
-                    "text":"是发---C"
-                }
-            ],
+            "tags": ["0","1"],
             "star": 1,
             "people":"杨军",
             "position":"市场经理",
@@ -69,20 +56,7 @@
             "name":"B娜娜科技",
             "progress":0,
             "task":"于6月21日在赛象酒店会面",
-            "tags": [
-                {
-                    "color":"danger",
-                    "text":"手机--A"
-                },
-                {
-                    "color":"info",
-                    "text":"蓝牙---B"
-                },
-                {
-                    "color":"info",
-                    "text":"是发---C"
-                }
-            ],
+            "tags": ["1","2"],
             "star": 1,
             "people":"杨军",
             "position":"市场经理",
@@ -130,20 +104,7 @@
             "name":"E娜娜科技",
             "progress":0,
             "task":"于6月21日在赛象酒店会面",
-            "tags": [
-                {
-                    "color":"danger",
-                    "text":"手机--A"
-                },
-                {
-                    "color":"info",
-                    "text":"蓝牙---B"
-                },
-                {
-                    "color":"info",
-                    "text":"是发---C"
-                }
-            ],
+            "tags": ["0","2"],
             "star": 1,
             "people":"杨军",
             "position":"市场经理",
@@ -191,20 +152,7 @@
             "name":"F娜娜科技",
             "progress":0,
             "task":"于6月21日在赛象酒店会面",
-            "tags": [
-                {
-                    "color":"danger",
-                    "text":"手机--A"
-                },
-                {
-                    "color":"info",
-                    "text":"蓝牙---B"
-                },
-                {
-                    "color":"info",
-                    "text":"是发---C"
-                }
-            ],
+            "tags": ["1","2"],
             "star": 1,
             "people":"杨军",
             "position":"市场经理",
@@ -252,20 +200,7 @@
             "name":"F娜娜科技",
             "progress":0,
             "task":"于6月21日在赛象酒店会面",
-            "tags": [
-                {
-                    "color":"danger",
-                    "text":"好是"
-                },
-                {
-                    "color":"info",
-                    "text":"蓝牙---B"
-                },
-                {
-                    "color":"info",
-                    "text":"是发---C"
-                }
-            ],
+            "tags": ["0","1"],
             "star": 1,
             "people":"杨军",
             "position":"市场经理",
@@ -313,20 +248,7 @@
             "name":"D娜娜科技",
             "progress":0,
             "task":"于6月21日在赛象酒店会面",
-            "tags": [
-                {
-                    "color":"danger",
-                    "text":"APP"
-                },
-                {
-                    "color":"info",
-                    "text":"蓝牙---B"
-                },
-                {
-                    "color":"info",
-                    "text":"是发---C"
-                }
-            ],
+            "tags": ["1","2"],
             "star": 1,
             "people":"杨军",
             "position":"市场经理",

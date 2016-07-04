@@ -7,6 +7,8 @@
         </button>
         <button class="btn btn-primary border-radius ml-10 btn-radius" ng-click='tagSortfuc()' data-animation="am-flip-x" data-placement="bottom" bs-tooltip data-title="显示全部"> <i class="fa fa-tag fa-lg"></i>
         </button>
+        <a ui-sref="web.businessadd()" class="btn btn-danger border-radius ml-10"  data-animation="am-flip-x" data-placement="bottom" bs-tooltip data-title="添加客户"> <i class="fa fa-plus fa-lg"></i>
+        </a>
 
     </h1>
     <div class="select-h select-h-close" ng-class="{true: 'select-h-active', false: 'select-h-close'}[checkArr.length!=0]">
@@ -44,23 +46,6 @@
                     </p>
                 </div>
                 <!-- /.col-xs-2 -->
-                <div class="col-xs-2">
-                    <div class="top-change">
-                        <a  data-animation="am-flip-x" bs-dropdown aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-folder fa-lg top-icon" data-animation="am-flip-x" data-placement="bottom" bs-tooltip data-title="移动分组"></i>
-                        </a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li ng-repeat="group in groups">
-                                <a href="" ng-click="moveGroup(checkArr,group)">
-                                    <i class="fa fa-chevron-right "></i>
-                                    {{group.label}}
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- /.col-xs-2 -->
-
                 <div class="col-xs-2">
                     <p>
                         <a href="" ng-click="deleteClue(checkArr)" data-animation="am-flip-x" data-placement="bottom" bs-tooltip data-title="删除">
@@ -137,11 +122,11 @@
                     </div>
                     <!-- /.col-xs-2 -->
                     <div class="col-xs-5">
-                        <p ng-bind="busines.bname"></p>
+                        <p ><a href="" ui-sref="web.businessdetial({id:busines.id})" ng-bind="busines.bname"> </a></p>
                     </div>
                     <!-- /.col-xs-4 -->
                     <div class="col-xs-5">
-                        <a ui-sref="web.businessdetial({id:busines.id})" ng-bind="company[busines.company].label"></a>
+                        <p ng-bind="company[busines.company].label"></p>
                     </div>
                     <!-- /.col-xs-5 --> </div>
                 <!-- /.row --> </div>
@@ -149,14 +134,10 @@
 
             <div class="col-md-1 col-xs-12">
                 	{{status[busines.status].label}}
-                        <a href="" data-animation="am-flip-x" bs-dropdown aria-haspopup="true" aria-expanded="false" placement="bottom">
-                            <i class="fa fa-edit fa-lg"></i>
-                        </a>
+                        <a href="" data-animation="am-flip-x"  bs-dropdown aria-haspopup="true" aria-expanded="false" placement="bottom" ><i class="fa fa-edit fa-lg"></i></a>
                         <ul class="dropdown-menu" role="menu">
-                            <li ng-repeat="statu in status">
-
-                                <a href="" ng-click="selectStatus(busines,statu,false)">
-                                    <i class="fa fa-user"></i>
+                            <li ng-repeat="statu in status  | compare: busines">
+                                <a href="" ng-click="checkStatus(statu.value,busines)" >
                                     {{statu.label}}
                                 </a>
                             </li>
@@ -202,9 +183,7 @@
                     </div>
                     <!-- /.col-xs-4 -->
                     <div class="col-xs-4">
-                        <p><a ui-sref="web.businessdetial({id:busines.id})" style="margin-right: 5px;" data-animation="am-flip-x" data-placement="bottom" bs-tooltip data-title="编辑">
-                            <i class="fa fa-edit fa-lg top-icon"></i>
-                        </a></p>
+
                     </div>
                     <!-- /.col-xs-4 --> </div>
                 <!-- /.row --> </div>

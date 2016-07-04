@@ -1,15 +1,17 @@
 {
     "id":1,
+    "isTop":true,
+    "isChecked":false,
     "company":"1",
     "bname":"15500件短袖",
-    "origin":"2",
-    "status":"1",     
+    "origins":"1",
+    "status":"0",     
     "mobile":"18608164404",
     "email":"yangjunalns@qq.com",
     "class":"1",
     "amount":"60万人民币",
-    "remark":"这是一个很重要的公司",
-    "date":"2043422198432",
+    "remark":"于7月6日提交订单",
+    "date":2043422198432,
     "isEdit": true,
     "people":"杨军",
     "schedule":[
@@ -101,12 +103,11 @@
     ],
     "business":[
         {
-            "time":"2016-06-12 12:30",
-            "content":"商机1111111"
-        },
-        {
-            "time":"2016-06-12 12:30",
-            "content":"商机222222"
+            "bname":"15500件短袖",
+            "people":"杨军",
+            "status":"0",
+            "selectPerson":"0", 
+            "time":1314846400000
         }
     ]
 }

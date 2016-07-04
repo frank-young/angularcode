@@ -26,9 +26,18 @@
         <div class="form-group">
             <label class="col-sm-3 control-label">状态</label>
             <div class="col-sm-9">
-                <button type="button" class="form-control form-select" ng-model="customer.status" data-html="1"  data-toggle="true" bs-options="statu.value as statu.label for statu in status" ng-disabled="customer.isEdit" placeholder="状态" data-animation="am-flip-x" bs-select>
+                <!-- <button type="button" class="form-control form-select" ng-model="customer.status" data-html="1"  data-toggle="true" bs-options="statu.value as statu.label for statu in status" ng-disabled="customer.isEdit" placeholder="状态" data-animation="am-flip-x" bs-select>
                     状态<span class="caret"></span>
-                </button>
+                </button> -->
+                        
+                        <button  data-animation="am-flip-x"  bs-dropdown aria-haspopup="true" aria-expanded="false" class="form-control form-select"  ng-disabled="customer.isEdit">{{status[customer.status].label}}<span class="caret"></span></button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li ng-repeat="statu in status | filter:compareStatus">
+                                <a href="" ng-click="checkStatus(statu.value)" >
+                                    {{statu.label}}
+                                </a>
+                            </li>
+                        </ul>
             </div>
         </div>
         <!-- /.form-group --></div>
@@ -50,7 +59,7 @@
         <div class="form-group">
             <label class="col-sm-3 control-label">项目来源</label>
             <div class="col-sm-9">
-                <button type="button" class="form-control form-select" ng-model="customer.origin" data-html="1" data-toggle="true" bs-options="origin.value as origin.label for origin in origins" ng-disabled="customer.isEdit" placeholder="项目来源" data-animation="am-flip-x" bs-select>
+                <button type="button" class="form-control form-select" ng-model="customer.origins" data-html="1" data-toggle="true" bs-options="origin.value as origin.label for origin in origins" ng-disabled="customer.isEdit" placeholder="项目来源" data-animation="am-flip-x" bs-select>
                     项目来源<span class="caret"></span> <!-- <i class="fa fa-sort-down fa-lg"></i> -->
                 </button>
             </div>

@@ -1,11 +1,11 @@
 <div ng-controller="CustomerCtrl">
     <h1 class="page-header">
         客户
-        <button class="btn btn-primary" ng-click="tagSortfuc({isTop:true});pinShowFunc()" data-animation="am-flip-x" data-placement="bottom" bs-tooltip data-title="选择固定位置" ng-class="{true: 'pin-show', false: 'pin-hide'}[!pinShow]"> <i class="fa fa-thumb-tack fa-lg" ></i>
+        <button class="btn btn-primary" ng-click="pinSortFunc({isTop:true});pinShowFunc()" data-animation="am-flip-x" data-placement="bottom" bs-tooltip data-title="选择固定位置" ng-class="{true: 'pin-show', false: 'pin-hide'}[!pinShow]"> <i class="fa fa-thumb-tack fa-lg" ></i>
         </button>
-        <button class="btn btn-primary" ng-click="tagSortfuc();pinShowFunc()" data-animation="am-flip-x" data-placement="bottom" bs-tooltip data-title="取消固定位置" ng-class="{true: 'pin-show', false: 'pin-hide'}[pinShow]"> <i class="fa fa-thumb-tack fa-lg rotate-45"></i>
+        <button class="btn btn-primary" ng-click="pinSortFunc();pinShowFunc()" data-animation="am-flip-x" data-placement="bottom" bs-tooltip data-title="取消固定位置" ng-class="{true: 'pin-show', false: 'pin-hide'}[pinShow]"> <i class="fa fa-thumb-tack fa-lg rotate-45"></i>
         </button>
-        <button class="btn btn-primary border-radius ml-10 btn-radius" ng-click='tagSortfuc()' data-animation="am-flip-x" data-placement="bottom" bs-tooltip data-title="显示全部"> <i class="fa fa-tag fa-lg"></i>
+        <button class="btn btn-primary border-radius ml-10 btn-radius" ng-click='tagSortFuc()' data-animation="am-flip-x" data-placement="bottom" bs-tooltip data-title="显示全部"> <i class="fa fa-tag fa-lg"></i>
         </button>
         <a ui-sref="web.customeradd()" class="btn btn-danger border-radius ml-10"  data-animation="am-flip-x" data-placement="bottom" bs-tooltip data-title="添加客户"> <i class="fa fa-plus fa-lg"></i>
                 </a>
@@ -126,7 +126,7 @@
 <!-- /.row -->
 <hr>
 
-<div class="row cus-item fade-pin" ng-repeat="customer in customers | orderBy:col:desc | filter: tagSort | offset: (currentPage-1)*itemsPerPage | limitTo:itemsPerPage" ng-mouseenter="show = true" ng-mouseleave="show = false">
+<div class="row cus-item fade-pin" ng-repeat="customer in customers | orderBy:col:desc | filter: {tags:tagSort} | filter: pinSort | offset: (currentPage-1)*itemsPerPage | limitTo:itemsPerPage" ng-mouseenter="show = true" ng-mouseleave="show = false">
     <div class="col-md-12">
         <div class="row">
             <div class="col-md-4 col-xs-12">
@@ -241,7 +241,7 @@
             </div>
             <div class="col-md-6">
                 <a href="" style="margin-right: 5px;"  ng-repeat="tag in customer.tags">
-                    <span class="label label-{{tag.color}}" ng-click=" tagSortfuc(tag.text) ">{{tag.text}}</span>
+                    <span class="label label-{{tags[tag].color}}" ng-click=" tagSortFuc(tag) "> {{tags[tag].text}} </span>
                 </a>
             </div>
         </div>

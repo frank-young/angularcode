@@ -7,10 +7,7 @@
     "country":"中国",
     "address":"中国天津市",
     "star": 2,
-    "tags":[
-        { "name": "蓝牙"},
-        { "name": "电子设备"}
-        ],
+    "tags":["0","1"],
     "progress":"1",     
     "mobile":"18608164404",
     "email":"yangjunalns@qq.com",

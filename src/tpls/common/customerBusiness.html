@@ -14,16 +14,12 @@
                 <h5>负责人</h5>
             </div>
             <!-- /.col-md-2 -->
-            <div class="col-md-2">
-                <h5>创建时间</h5>
+            <div class="col-md-3">
+                <h5>修改时间</h5>
             </div>
             <!-- /.col-md-2 -->
             <div class="col-md-2">
                 <h5>主要联系人</h5>
-            </div>
-            <!-- /.col-md-2 -->
-            <div class="col-md-2">
-                <h5></h5>
             </div>
             <!-- /.col-md-2 -->
 
@@ -33,37 +29,23 @@
 
         <div class="row cus-business" ng-repeat="business in customer.business">
             <div class="col-sm-2">
-                <a href="">SNS推广计划</a>
+                <a href="">{{business.bname}}</a>
             </div>
             <!-- /.col-sm-2 -->
             <div class="col-sm-2">
-                进行中
+                {{status[business.status].label}}
             </div>
             <!-- /.col-sm-2 -->
             <div class="col-sm-2">
-                杨军
+                {{business.people}}
+            </div>
+            <!-- /.col-sm-2 -->
+            <div class="col-sm-3">
+                {{business.time | schetime}}
             </div>
             <!-- /.col-sm-2 -->
             <div class="col-sm-2">
-                2016-3-4
-            </div>
-            <!-- /.col-sm-2 -->
-            <div class="col-sm-2">
-                张三  
-            </div>
-            <!-- /.col-sm-2 -->
-            <div class="col-sm-2">
-                <div class="row">
-                    <div class="col-xs-6">
-                        <a href=""><i class="fa fa-edit fa-lg"></i></a>
-                    </div>
-                    <!-- /.col-xs-6 -->
-                    <div class="col-xs-6">
-                        <a href="javascript:;" ng-click="openBusiness()"><i class="fa fa-arrow-circle-right fa-lg"></i></a>
-                    </div>
-                    <!-- /.col-xs-6 -->
-                </div>
-                <!-- /.row -->
+                {{person[business.selectPerson].label}}
             </div>
             <!-- /.col-sm-2 -->
         </div>
@@ -72,34 +54,3 @@
     </div>
 </div>
 <!-- /.row --> 
-
-<!-- 商机弹出框 -->
-<script type="text/ng-template" id="business.html">
-    <div class="modal-header">
-        <h4 class="modal-title">推进信息</h4>
-    </div>
-    <div class="modal-body">
-        <div class="row">
-            <div class="col-sm-12" style="margin-bottom:20px;">
-                <div class="form-group">
-                    <label class="col-sm-3 control-label">前进到阶段</label>
-                    <div class="col-sm-5">
-                        <input type="text" class="form-control">
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-12">
-                <div class="form-group">
-                    <label class="col-sm-3 control-label"> 阶段描述{{business.content}}</label>
-                    <div class="col-sm-9">
-                        <textarea cols="20" rows="5" class="form-control" placeholder="项目进行中出现的问题，解决方法。" ng-model="business.content"></textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal-footer">
-        <button class="btn btn-primary" type="button" ng-click="businessSave()">保存</button>
-<!--         <button class="btn btn-danger" type="button" ng-click="businessCancel()">取消</button> -->
-    </div>
-</script>

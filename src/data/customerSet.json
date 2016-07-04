@@ -36,6 +36,23 @@
             {"value":"1","label":"json"},
             {"value":"2","label":"联系人3"}
         ],
+    "tags":[
+                {
+                    "value":"0",
+                    "color":"danger",
+                    "text":"手机"
+                },
+                {
+                    "value":"1",
+                    "color":"info",
+                    "text":"平板"
+                },
+                {
+                    "value":"2",
+                    "color":"info",
+                    "text":"电脑"
+                }
+            ],
     "status":[
             {"value":"0","label":"签订合同"},
             {"value":"1","label":"进行中"},

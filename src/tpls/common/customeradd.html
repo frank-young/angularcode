@@ -396,13 +396,10 @@
         <div class="form-group">
             <label class="col-sm-3 control-label">客户标签</label>
             <div class="col-sm-9">
-                <ui-select multiple tagging="tagTransform" ng-model="customer.tags" theme="bootstrap" title="选择标签" style="width: 100%;" >
-                    <ui-select-match placeholder="选择标签">{{$item.name}}</ui-select-match>
-                    <ui-select-choices repeat="tag in tags | propsFilter: {name: $select.search}">
-                        <div ng-if="tag.isTag" ng-bind-html="(tag.name | highlight: $select.search) +' (新添)'"></div>
-                        <div ng-if="!tag.isTag" ng-bind-html="tag.name + tag.isTag| highlight: $select.search"></div>
-                    </ui-select-choices>
-                </ui-select>
+                <button type="button" class="form-control form-select" ng-model="customer.tags" data-html="1" data-multiple="1" data-toggle="true" bs-options="tag.value as tag.text for tag in tags" placeholder="客户标签" max-length="4"  max-length-html="个标签" all-text="全选" none-text="取消全选" all-none-buttons="1"  data-animation="am-flip-x" bs-select>
+                    客户标签<span class="caret"></span>
+                </button>
+
             </div>
         </div>
         <!-- /.form-group -->

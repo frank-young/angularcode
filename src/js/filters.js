@@ -28,7 +28,7 @@ routerApp.filter('propsFilter', function() {
     return out;
   };
 });
-
+/* 日期 格式：刚刚，5分钟前，2小时前，1天前*/
 routerApp.filter('time', function(){
   return function(createtime){
     if(createtime){
@@ -66,7 +66,7 @@ routerApp.filter('time', function(){
   };
 
 });
-
+/* 日期 格式：2016-04-26*/
 routerApp.filter('schetime', function(){
   return function(createtime){
     if(createtime){
@@ -88,10 +88,23 @@ routerApp.filter('schetime', function(){
   };
 
 });
-
+/* 分页 */
 routerApp.filter('offset', function() { 
   return function(input, start) {
-    start = parseInt(start, 10);
-    return input.slice(start);
+    var start = parseInt(start, 10);
+    return input.splice(start);
   };
+});
+
+/* 过滤项目列表中的状态，只显示比现在高的状态*/
+routerApp.filter('compare', function() { 
+  return function(input,value){
+        var array = [];
+        for(var i=0;i<input.length;i++){
+            if(input[i].value>value.status){
+                array.push(input[i]);
+            }
+        }
+        return array;
+    }
 });
