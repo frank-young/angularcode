@@ -1,0 +1,45 @@
+{
+  "name": "angular-simditor",
+  "version": "0.1.1",
+  "homepage": "https://github.com/ghostboyzone/angular-simditor",
+  "authors": [
+    "ghostboyzone <ghostboyzone@gmail.com>"
+  ],
+  "description": "Simditor's AngularJS Version",
+  "main": "src/angular-simditor.js",
+  "keywords": [
+    "angular",
+    "simditor"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": ">=1.2.0",
+    "simditor": "~2.1.*",
+    "simditor-html": "mycolorway/simditor-html#~1.0.0"
+  },
+  "overrides": {
+    "simditor-html": {
+      "main": [
+        "lib/simditor-html.js",
+        "styles/simditor-html.css"
+      ]
+    }
+  },
+  "_release": "0.1.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.1.1",
+    "commit": "d4ae49eb7f72d164e71a554bb3b2398a125c70cb"
+  },
+  "_source": "https://github.com/ghostboyzone/angular-simditor.git",
+  "_target": "^0.1.1",
+  "_originalSource": "angular-simditor",
+  "_direct": true
+}
